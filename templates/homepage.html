@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+
+{% block base_content %}
+
+
+
+	<div id="top-area">
+		<div id="top-area-bg">
+			<div id="bottom-area-bg">
+				<div class="container">
+					<div id="featured">
+                    <a id="left-arrow" href="http://xn----7sbadopoap4a1bx6d4c8b.xn--p1ai/#" style="display: none;">Пред.</a>
+                    <a id="right-arrow" href="http://xn----7sbadopoap4a1bx6d4c8b.xn--p1ai/#" style="display: none;">След.</a>
+
+                    <div id="slides" style="background-image: none;">
+                                            <div class="slide" style="display: block;">
+
+                                <div class="featured-image">
+                                   <img src=" {% static 'pic/IMG_5286-231437_380x230.jpg' %}" />
+                                <div class="featured-bg"></div>
+                                                    </div> <!-- end .featured-image -->
+                                <div class="featured-description">
+                                      <h1><a href="{% url 'about_us' %}">O нас</a></h1>
+                                    <p>Ферма «Усадьба Княжичи» — семейное фермерское хозяйство расположенное в 450 км от Москвы, на границе Калужской и Брянской областей, на берегу живописного озера.</p>
+
+                                </div> <!-- end .description -->
+                            </div> <!-- end .slide -->
+                            </div> <!-- end #slides -->
+
+                    <div id="controllers"></div>
+                </div> <!-- end #featured -->				</div> <!-- end .container -->
+			</div> <!-- end #bottom-area-bg -->
+		</div> <!-- end #top-area-bg -->
+	</div> <!-- end #top-area -->
+
+
+
+
+
+{% endblock %}

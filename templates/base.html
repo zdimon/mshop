@@ -1,0 +1,89 @@
+{% load sekizai_tags %}
+{% load staticfiles %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru-RU">
+  <head>
+      <title>{% block meta_title %}{% endblock %}</title>
+      <meta name="description" content="{% block meta_description %}{% endblock %}"/>
+      <meta name="keywords" content="{% block meta_keywords %}{% endblock %}"/>
+      {% render_block "css" %}
+      <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css" media="screen" />
+
+
+  </head>
+<body class="home blog chrome">
+<div id="color-stripes"></div>
+
+
+
+<div id="header">
+		<div class="container clearfix">
+			<div id="logo-area">
+				<a href="{% url "home" %}">
+					<img src="{% static 'images/logo.png' %}" alt="Усадьба Княжичи" id="logo"/>
+				</a>
+				<img src="{% static 'images/slogan.png' %}" alt="Семейная ферма натуральных деревенских продуктов" id="slogan"/>
+				<p id="slogan" style="display: none;">Просто. Вкусно. +7 (495) 792 49 10</p>
+			</div> <!-- end #logo-area -->
+			<div id="login-form">
+				<ul>
+				    <li><a class="simplemodal-login" href="">Войти</a></li>
+				</ul>
+			</div> <!-- end #login-form -->
+
+
+			<div class="clear"></div>
+
+			<div id="menu-content">
+				<div id="menu-shadow"></div>
+				<ul id="secondary-menu" class="nav clearfix">
+                    <li ><a href="{% url 'news_list' %}">О нашей семье</a></li>
+                <li>
+                    <a href="{% url 'category_list' %}">Каталог продуктов</a>
+                </li>
+                 <li>
+                    <a href="{% url 'delivery' %}">Доставка и оплата</a>
+                </li>
+                <li>
+                    <a href="">Рецепты</a>
+                </li>
+                <li>
+                    <a href="">Отзывы</a>
+                </li>
+                <li>
+                    <a href="">Контакты</a>
+                </li>
+
+             </ul>
+            </div> <!-- menu-content -->
+		</div> <!-- end .container -->
+	</div> <!-- end #header -->
+
+
+
+
+
+
+      {% block base_content %}    {% endblock %}
+
+
+
+<div id="footer-bottom">
+<div class="container clearfix">
+<ul id="bottom-nav" class="bottom-nav">
+<li id="menu-item-1431" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1431">
+<li id="menu-item-1482" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1482">
+<a href="{% url 'quality' %}">Гарантия качества</a>
+</li>
+</ul>
+<p id="copyright">
++7 (495) 792-49-10 Усадьба Княжичи | Семейная ферма
+<a href="http://усадьба-княжичи.рф">натуральных деревенских продуктов</a>
+</p>
+</div>
+</div>
+
+
+      {% render_block "js" %}
+  </body>
+</html>

@@ -1,0 +1,14 @@
+[uwsgi]
+thread=3
+master          = true
+processes       = 10
+module = cms_usadba.wsgi
+chdir = /home/zarik/web/django_projects/cms_ve/cms_usadba
+socket          = /tmp/usadbacms.sock
+logto = /var/log/uwsgi/usadbacms.log
+vacuum          = true
+max-requests = 5000
+buffer-size=32768
+chmod-socket = 777
+plugins=python
+home            = /home/zarik/web/django_projects/cms_ve

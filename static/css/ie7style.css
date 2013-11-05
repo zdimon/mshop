@@ -1,0 +1,12 @@
+a { cursor: pointer; }
+
+#header, #main-content-area { z-index: 40; position: relative; }
+#top-area { z-index: 39; position: relative; }
+
+#logo-area { width: 450px; }
+	p#slogan { float: left; }
+
+#menu-shadow { display: none; }
+
+h3.offer-title { z-index: 50; }
+.boutique_description_border { background: #fff; z-index: 400; }

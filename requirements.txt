@@ -1,0 +1,9 @@
+Django==1.5.4
+Pillow
+South==0.8.1
+django-mptt == 0.5.2
+django-sekizai==0.7
+psycopg2==2.5.1
+simple-translation
+django-staticfiles
+django-tinymce

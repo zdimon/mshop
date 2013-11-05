@@ -6,7 +6,7 @@ from news.items import ThumbnailImageField
 # Create your models here.
 class News(models.Model):
     title = models.CharField(max_length=250, verbose_name=u'Заголовок')
-    image  = ThumbnailImageField(upload_to='news', verbose_name=u'Изображение', blank=True)
+    image  = models.ImageField(upload_to='news', verbose_name=u'Изображение', blank=True)
     desc = models.TextField(verbose_name=u'Короткое описание')
     content =tinymce_models.HTMLField()
     datetime = models.DateTimeField(u'Дата публикации')

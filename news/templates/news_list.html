@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+{% load staticfiles %}
+
+{% block meta_title %}
+  Новости | Усадьба Княжичи
+{% endblock %}
+
+{% block meta_keyword %}
+  Новости | Усадьба Княжичи
+{% endblock %}
+
+{% block meta_description %}
+  Новости | Усадьба Княжичи
+{% endblock %}
+
+{% block base_content %}
+
+
+
+	<div id="top-area">
+		<div id="top-area-bg">
+			<div id="bottom-area-bg">
+				<div class="container">
+					<div id="category-inner">
+                      <h1 class="category-title">Новости</h1>
+                        <p class="description">
+                           что нового у нас на ферме
+                        </p>
+                    </div> <!-- end .container -->
+                </div> <!-- end #featured -->
+			</div> <!-- end #bottom-area-bg -->
+		</div> <!-- end #top-area-bg -->
+	</div> <!-- end #top-area -->
+
+
+    <div id="main-content-area" class="container">
+        <div id="breadcrumbs">
+        <a href="{% url 'home' %}">Главная</a>
+        <span class="raquo">»</span>
+           Новости
+        </div>
+        <div id="main-content">
+
+          {% for n in items %}
+              {{ n.title }}{{ n.image.path }}
+
+              {% thumbnail n.image "50x50" as im %}
+                <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+                  {% empty %}
+                    <p>No image</p>
+                {% endthumbnail %}
+
+
+           {% endfor %}
+
+         </div>
+    </div>
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,15 @@
+[uwsgi] 
+ thread = 3 
+ master = true
+ processes = 2
+ module = settings.wsgi
+ chdir = /home/zarik/web/django_projects/mshop_ve/mshop/mshop
+ socket = /tmp/mshop.sock
+ logto = /var/log/uwsgi/mshop.log
+ vacuum = true
+ max-requests = 5000
+ buffer-size = 32768
+ chmod-socket = 777
+ plugins = python
+ home = /home/zarik/web/django_projects/mshop_ve
+

@@ -55,8 +55,8 @@ alpha="[uwsgi] \n
 thread          = 3    \n
 master          = true\n
 processes       = 2\n
-module          = $1.wsgi\n
-chdir           = /home/zarik/web/django_projects/cms_ve/cms_usadba\n
+module          = settings.wsgi\n
+chdir           = $PWD\n
 socket          = /tmp/$1.sock\n
 logto           = /var/log/uwsgi/$1.log\n
 vacuum          = true\n
@@ -96,7 +96,7 @@ source ../bin/activate
 echo -e "Setup django and requirement packets.......\n"
 pip install -r requirements.txt
 
-read -p "Press any key to continue... " -n1 -s
+read -p "Please edit $PWD/setings/setings.py and set connection to your database. Then press any key to continue... " -n1 -s
 
 
 echo -e "Make static dir.......\n"
@@ -110,5 +110,9 @@ python manage.py collectstatic --noinput
 echo -e "Run syncdb command.......\n"
 python manage.py syncdb
 
+echo -e "Run migrate command.......\n"
+python manage.py migrate
 
+echo -e "On localhost Add this string in /etc/host '127.0.0.1   $1.local' and then you can access to site by using this address http://$1.local \n"
+read -p "Press any key to continue... " -n1 -s
 fi

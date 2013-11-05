@@ -7,3 +7,4 @@ psycopg2==2.5.1
 simple-translation
 django-staticfiles
 django-tinymce
+sorl-thumbnail==11.12

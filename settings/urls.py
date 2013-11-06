@@ -30,6 +30,9 @@ urlpatterns = patterns('',
     url(r'^logout/$', 'django.contrib.auth.views.logout',{'next_page': '/'}, name='logout'),
     url(ur'^accounts/profile/$', 'reg.views.welcome'),
 
+    url(r'^accounts/', include('registrations.backends.default.urls')),
+
+    url(ur'^ферма/контакты', include('contact_form.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

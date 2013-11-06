@@ -8,3 +8,4 @@ simple-translation
 django-staticfiles
 django-tinymce
 sorl-thumbnail==11.12
+django-registration

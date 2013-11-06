@@ -34,6 +34,7 @@
                <div id="login-form">
 				<ul>
 				    <li><a class="simplemodal-login" href="{% url 'login_form' %}">Войти</a></li>
+                     <li><a class="simplemodal-login" href="{% url 'registration_register' %}">Зарегистрироваться</a></li>
 				</ul>
 			   </div> <!-- end #login-form -->
             {% endif %}
@@ -61,7 +62,7 @@
                     <a href="">Отзывы</a>
                 </li>
                 <li>
-                    <a href="">Контакты</a>
+                    <a href="{% url 'contact_form' %}">Контакты</a>
                 </li>
 
              </ul>

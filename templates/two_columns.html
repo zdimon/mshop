@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block base_content %}
+
+    <div id="top-area">
+		<div id="top-area-bg">
+			<div id="bottom-area-bg">
+				<div class="container">
+					<div id="category-inner">
+                      <h1 class="category-title">{% block page_title %}{% endblock %}</h1>
+                        <p class="description">
+                           {% block page_slogan %}{% endblock %}
+                        </p>
+                    </div> <!-- end .container -->
+                </div> <!-- end #featured -->
+			</div> <!-- end #bottom-area-bg -->
+		</div> <!-- end #top-area-bg -->
+	</div> <!-- end #top-area -->
+
+     <div id="main-content-area" class="container">
+
+
+        <div id="breadcrumbs">
+            {% block breadcrumbs %}{% endblock %}
+        </div>
+
+
+          <div id="main-content">
+
+                <table>
+                    <tr>
+                        <td width="700" valign="top">
+                            {% block main_content %}
+                            {% endblock %}
+                        </td>
+
+                        <td  valign="top">
+                            <a target="_blank" href="http://breadmenu.ru">
+                            <img title="Пекарня «Хлебное Меню»" alt="Хлебное Меню" src="{% static 'img/breadmenu.png' %}">
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+          <div id="fb-root"style="clear: both"></div>
+          </div>
+    </div>
+{% endblock %}

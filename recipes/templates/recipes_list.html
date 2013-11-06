@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "two_columns.html" %}
 {% load thumbnail %}
 {% load staticfiles %}
 
@@ -14,33 +14,19 @@
   Рецепты | Усадьба Княжичи
 {% endblock %}
 
-{% block base_content %}
 
 
+{% block page_title %}Рецепты{% endblock %}
+{% block page_slogan %}{% endblock %}
 
-	<div id="top-area">
-		<div id="top-area-bg">
-			<div id="bottom-area-bg">
-				<div class="container">
-					<div id="category-inner">
-                      <h1 class="category-title">Рецепты</h1>
-                        <p class="description">
-                           Кулинарные шедевры наших друзей и партнеров, созданные из продуктов нашей фермы. Наш девиз: ПРОСТО.ВКУСНО. У Вас есть любимое блюдо? Мы бесплатно предоставим Вам свои продукты для его создания и с удовольствием попробуем вместе. Дерзайте!
-                        </p>
-                    </div> <!-- end .container -->
-                </div> <!-- end #featured -->
-			</div> <!-- end #bottom-area-bg -->
-		</div> <!-- end #top-area-bg -->
-	</div> <!-- end #top-area -->
-
-
-    <div id="main-content-area" class="container">
-        <div id="breadcrumbs">
-        <a href="{% url 'home' %}">Главная</a>
+{% block breadcrumbs %}
+    <a href="{% url 'home' %}">Главная</a>
         <span class="raquo">»</span>
            Рецепты
-        </div>
-        <div id="main-content">
+{% endblock %}
+
+
+{% block main_content %}
 
           {% for n in items %}
               <div>
@@ -55,12 +41,6 @@
 
                <div id="fb-root"style="clear: both"></div>
            {% endfor %}
-
-         <div id="fb-root"style="clear: both"></div>
-
-
-         </div>
-    </div>
 
 
 

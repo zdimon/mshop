@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "two_columns.html" %}
 {% load thumbnail %}
 {% load staticfiles %}
 
@@ -14,33 +14,19 @@
   Новости | Усадьба Княжичи
 {% endblock %}
 
-{% block base_content %}
 
+{% block page_title %}Новости{% endblock %}
+{% block page_slogan %} что нового у нас на ферме{% endblock %}
 
-
-	<div id="top-area">
-		<div id="top-area-bg">
-			<div id="bottom-area-bg">
-				<div class="container">
-					<div id="category-inner">
-                      <h1 class="category-title">Новости</h1>
-                        <p class="description">
-                           что нового у нас на ферме
-                        </p>
-                    </div> <!-- end .container -->
-                </div> <!-- end #featured -->
-			</div> <!-- end #bottom-area-bg -->
-		</div> <!-- end #top-area-bg -->
-	</div> <!-- end #top-area -->
-
-
-    <div id="main-content-area" class="container">
-        <div id="breadcrumbs">
-        <a href="{% url 'home' %}">Главная</a>
+{% block breadcrumbs %}
+    <a href="{% url 'home' %}">Главная</a>
         <span class="raquo">»</span>
            Новости
-        </div>
-        <div id="main-content">
+{% endblock %}
+
+
+{% block main_content %}
+
 
           {% for n in items %}
               <div>
@@ -52,17 +38,9 @@
 
 
              {{ n.desc }}
+            <div id="fb-root"style="clear: both"></div>
 
-               <div id="fb-root"style="clear: both"></div>
            {% endfor %}
-
-         <div id="fb-root"style="clear: both"></div>
-
-
-         </div>
-    </div>
-
-
 
 
 

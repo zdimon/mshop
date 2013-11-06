@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "two_columns.html" %}
 {% load staticfiles %}
 
 {% block meta_title %}
@@ -13,50 +13,19 @@
   {{ page.seo_description }}
 {% endblock %}
 
-{% block base_content %}
 
+{% block page_title %}{{ page.title }}{% endblock %}
+{% block page_slogan %}{{ page.short_content }}{% endblock %}
 
-
-	<div id="top-area">
-		<div id="top-area-bg">
-			<div id="bottom-area-bg">
-				<div class="container">
-					<div id="category-inner">
-                      <h1 class="category-title">{{ page.title }}</h1>
-                        <p class="description">
-                            {{ page.short_content }}
-                        </p>
-                    </div> <!-- end .container -->
-                </div> <!-- end #featured -->
-			</div> <!-- end #bottom-area-bg -->
-		</div> <!-- end #top-area-bg -->
-	</div> <!-- end #top-area -->
-
-
-    <div id="main-content-area" class="container">
-        <div id="breadcrumbs">
-        <a href="{% url 'home' %}">Главная</a>
+{% block breadcrumbs %}
+    <a href="{% url 'home' %}">Главная</a>
         <span class="raquo">»</span>
            {{ page.title }}
-        </div>
-        <div id="main-content">
-
-            <table>
-                <tr>
-                    <td width="650" style="padding: 10px; text-align: justify">
-                         {{ page.content | safe }}
-                    </td>
-                    <td style="padding: 10px">
-
-                    </td>
-                </tr>
-            </table>
-
-         </div>
-    </div>
+{% endblock %}
 
 
+{% block main_content %}
 
-
+{{ page.content | safe }}
 
 {% endblock %}

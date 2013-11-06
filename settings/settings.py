@@ -136,6 +136,7 @@ INSTALLED_APPS = (
     'south',
     'sekizai',
     'sorl.thumbnail',
+    'reg',
         # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )

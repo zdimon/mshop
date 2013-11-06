@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "two_columns.html" %}
 {% load thumbnail %}
 {% load staticfiles %}
 
@@ -14,45 +14,26 @@
   Новости | {{ item.title }}
 {% endblock %}
 
-{% block base_content %}
 
+{% block page_title %}{{ item.title }}{% endblock %}
+{% block page_slogan %}{% endblock %}
 
-
-	<div id="top-area">
-		<div id="top-area-bg">
-			<div id="bottom-area-bg">
-				<div class="container">
-					<div id="category-inner">
-                      <h1 class="category-title">{{ item.title }}</h1>
-
-                    </div> <!-- end .container -->
-                </div> <!-- end #featured -->
-			</div> <!-- end #bottom-area-bg -->
-		</div> <!-- end #top-area-bg -->
-	</div> <!-- end #top-area -->
-
-
-    <div id="main-content-area" class="container">
-        <div id="breadcrumbs">
-        <a href="{% url 'home' %}">Главная</a>
+{% block breadcrumbs %}
+     <a href="{% url 'home' %}">Главная</a>
         <span class="raquo">»</span>
-           Новости <span class="raquo">»</span> {{ item.title }}
-        </div>
-        <div id="main-content">
+           Рецепты <span class="raquo">»</span> {{ item.title }}
+{% endblock %}
+
+
+{% block main_content %}
+
+
 
                 {% thumbnail item.image "240x240" as im %}
                   <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" align="left" style="padding: 10px">
                 {% endthumbnail %}
 
             {{ item.content | safe }}
-
-        <div id="fb-root"style="clear: both"></div>
-
-         </div>
-    </div>
-
-
-
 
 
 {% endblock %}

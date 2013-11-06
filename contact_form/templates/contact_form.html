@@ -1,0 +1,31 @@
+{% extends "two_columns.html" %}
+
+
+
+{% block meta_title %}
+  Контакты
+{% endblock %}
+
+{% block meta_keyword %}
+  Контакты
+{% endblock %}
+
+{% block meta_description %}
+ Контакты
+{% endblock %}
+
+
+{% block page_title %}Контакты{% endblock %}
+{% block page_slogan %}{% endblock %}
+
+
+
+
+{% block main_content %}
+<form method="post" action="{% url 'contact_form' %}">
+  {% csrf_token %}
+  {{ form.as_p }}
+
+  <input type="submit" value="оставить отзыв" />
+</form>
+{% endblock %}

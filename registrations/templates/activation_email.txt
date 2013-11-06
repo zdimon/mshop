@@ -1,0 +1,15 @@
+{% load i18n %}
+{% url 'registration_activate' activation_key as activation_key_url%}
+
+{% blocktrans with sitename=site.name siteurl=site.domain %}
+
+Вы (или кто то от вашего имени) запросил регистрацию на нашем сайте {{ sitename }}.
+Если это не вы удалите это письмо.
+чтобы активировать Ваш аккаунт кликните на ссылку ниже.
+
+
+http://{{ siteurl }}{{ activation_key_url }}
+
+С уважением.
+{{ sitename }} Администрация
+{% endblocktrans %}

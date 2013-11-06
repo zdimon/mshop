@@ -1,0 +1,31 @@
+{% extends "two_columns.html" %}
+
+
+
+{% block meta_title %}
+  Регистрация нового пользователя
+{% endblock %}
+
+{% block meta_keyword %}
+  Регистрация нового пользователя
+{% endblock %}
+
+{% block meta_description %}
+  Регистрация нового пользователя
+{% endblock %}
+
+
+{% block page_title %}Регистрация нового пользователя{% endblock %}
+{% block page_slogan %}{% endblock %}
+
+
+
+
+{% block main_content %}
+<form method="post" action=".">
+  {% csrf_token %}
+  {{ form.as_p }}
+
+  <input type="submit" value="Зарегистрироваться" />
+</form>
+{% endblock %}

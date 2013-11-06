@@ -25,11 +25,21 @@
 				<img src="{% static 'images/slogan.png' %}" alt="Семейная ферма натуральных деревенских продуктов" id="slogan"/>
 				<p id="slogan" style="display: none;">Просто. Вкусно. +7 (495) 792 49 10</p>
 			</div> <!-- end #logo-area -->
-			<div id="login-form">
+
+
+            {% if user.is_authenticated %}
+                <p>Добро пожаловать, {{ user.username }}.</p>
+                <a href="{% url 'logout' %}">Выйти</a></p>
+            {% else %}
+               <div id="login-form">
 				<ul>
-				    <li><a class="simplemodal-login" href="">Войти</a></li>
+				    <li><a class="simplemodal-login" href="{% url 'login_form' %}">Войти</a></li>
 				</ul>
-			</div> <!-- end #login-form -->
+			   </div> <!-- end #login-form -->
+            {% endif %}
+
+
+
 
 
 			<div class="clear"></div>
@@ -45,7 +55,7 @@
                     <a href="{% url 'delivery' %}">Доставка и оплата</a>
                 </li>
                 <li>
-                    <a href="">Рецепты</a>
+                    <a href="{% url 'recipes_list' %}">Рецепты</a>
                 </li>
                 <li>
                     <a href="">Отзывы</a>

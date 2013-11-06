@@ -4,6 +4,7 @@ from django.conf.urls.static import static
 from django.conf import settings
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
+
 admin.autodiscover()
 
 urlpatterns = patterns('',
@@ -14,7 +15,22 @@ urlpatterns = patterns('',
      url(ur'^гарантия-качества$', 'page.views.page_show', {'slug': 'quality'}, name='quality'),
      url(r'^list$','mshop.views.category_list',name='category_list'),
     # url(r'^settings/', include('settings.foo.urls')),
+
+    # новости############
     url(ur'^ферма/новости$', 'news.views.news_list', name='news_list'),
+    url(ur'^новость/(?P<id>\d+)/$', 'news.views.news_item'),
+    ##################
+
+    #####Рецепты####################
+    url(ur'^ферма/рецепты$', 'recipes.views.recipes_list', name='recipes_list'),
+    url(ur'^рецепт/(?P<id>\d+)/$', 'recipes.views.recipes_item'),
+    ####################
+
+    url(r'^accounts/login/$', 'django.contrib.auth.views.login', {'template_name': 'login.html'}, name='login_form'),
+    url(r'^logout/$', 'reg.views.logout', name='logout'),
+    url(ur'^accounts/profile/$', 'reg.views.welcome'),
+
+
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 

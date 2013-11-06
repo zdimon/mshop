@@ -2,6 +2,8 @@
 import os
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
+THUMBNAIL_DEBUG = True
+
 
 PROJECT_PATH = os.path.split(os.path.abspath(os.path.dirname(__file__)))[0]
 
@@ -66,7 +68,7 @@ MEDIA_URL = "/media/"
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
-STATIC_ROOT = os.path.join(PROJECT_PATH, "static")
+#STATIC_ROOT = os.path.join(PROJECT_PATH, "static")
 STATIC_URL = "/static/"
 
 # Additional locations of static files
@@ -177,3 +179,5 @@ LOGGING = {
         },
     }
 }
+
+THUMBNAIL_ENGINE = 'sorl.thumbnail.engines.pil_engine.Engine'

@@ -3,15 +3,15 @@
 {% load staticfiles %}
 
 {% block meta_title %}
-  Новости | Усадьба Княжичи
+  Новости | {{ item.title }}
 {% endblock %}
 
 {% block meta_keyword %}
-  Новости | Усадьба Княжичи
+  Новости | {{ item.title }}
 {% endblock %}
 
 {% block meta_description %}
-  Новости | Усадьба Княжичи
+  Новости | {{ item.title }}
 {% endblock %}
 
 {% block base_content %}
@@ -23,10 +23,8 @@
 			<div id="bottom-area-bg">
 				<div class="container">
 					<div id="category-inner">
-                      <h1 class="category-title">Новости</h1>
-                        <p class="description">
-                           что нового у нас на ферме
-                        </p>
+                      <h1 class="category-title">{{ item.title }}</h1>
+
                     </div> <!-- end .container -->
                 </div> <!-- end #featured -->
 			</div> <!-- end #bottom-area-bg -->
@@ -38,26 +36,17 @@
         <div id="breadcrumbs">
         <a href="{% url 'home' %}">Главная</a>
         <span class="raquo">»</span>
-           Новости
+           Новости <span class="raquo">»</span> {{ item.title }}
         </div>
         <div id="main-content">
 
-          {% for n in items %}
-              <div>
-                <h2 class="title"><a href="{{  n.get_absolute_url }}"> {{ n.title }}</a></h2>
-                {% thumbnail n.image "140x140" as im %}
+                {% thumbnail item.image "240x240" as im %}
                   <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" align="left" style="padding: 10px">
                 {% endthumbnail %}
-              </div>
 
+            {{ item.content | safe }}
 
-             {{ n.desc }}
-
-               <div id="fb-root"style="clear: both"></div>
-           {% endfor %}
-
-         <div id="fb-root"style="clear: both"></div>
-
+        <div id="fb-root"style="clear: both"></div>
 
          </div>
     </div>

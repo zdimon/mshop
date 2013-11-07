@@ -139,6 +139,7 @@ INSTALLED_APPS = (
     'reg',
     'registrations',
     'contact_form',
+    'testimonials',
         # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )

@@ -21,7 +21,7 @@
 {% block breadcrumbs %}
      <a href="{% url 'home' %}">Главная</a>
         <span class="raquo">»</span>
-           Новости <span class="raquo">»</span> {{ item.title }}
+          <a href="{% url 'news_list' %}"> Новости </a> <span class="raquo">»</span> {{ item.title }}
 {% endblock %}
 
 

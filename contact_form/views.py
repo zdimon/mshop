@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 View which can render and send email from a contact form.
 

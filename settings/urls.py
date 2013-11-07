@@ -34,6 +34,9 @@ urlpatterns = patterns('',
 
     url(ur'^ферма/контакты', include('contact_form.urls')),
 
+    url(ur'^отзывы/', include('testimonials.urls')),
+
+
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 

@@ -16,10 +16,10 @@ from contact_form.views import ContactFormView
 
 
 urlpatterns = patterns('',
-                       url(r'^$',
+                       url(ur'^$',
                            ContactFormView.as_view(),
                            name='contact_form'),
-                       url(r'^sent/$',
+                       url(ur'^sent/$',
                            TemplateView.as_view(
                                template_name='contact_form_sent.html'
                                ),

@@ -3,6 +3,12 @@
 {% block page_title %}Наша продукция{% endblock %}
 {% block page_slogan %}мы предлагаем только свежие продукты собственного производства{% endblock %}
 
+{% block breadcrumbs %}
+     <a href="{% url 'home' %}">Главная</a>
+        <span class="raquo">»</span>
+           Каталог продуктов
+{% endblock %}
+
 {% block main_content %}
 
 

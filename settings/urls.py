@@ -23,7 +23,7 @@ urlpatterns = patterns('',
 
     #####Рецепты####################
     url(ur'^ферма/рецепты$', 'recipes.views.recipes_list', name='recipes_list'),
-    url(ur'^рецепт/(?P<id>\d+)/$', 'recipes.views.recipes_item'),
+    url(ur'^рецепт/(?P<id>\d+)/$', 'recipes.views.recipes_item', name='recipes_item'),
     ####################
 
     url(r'^accounts/login/$', 'django.contrib.auth.views.login', {'template_name': 'login.html'}, name='login_form'),
@@ -36,6 +36,7 @@ urlpatterns = patterns('',
 
     url(r'^testimonials/', include('testimonials.urls')),
 
+    url(r'^captcha/', include('captcha.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

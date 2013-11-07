@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load staticfiles %}
-
+{% load thumbnail %}
 
 {% block base_content %}
 
@@ -36,6 +36,61 @@
 	</div> <!-- end #top-area -->
 
 
+    <div id="main-content-area" class="container">
+        <h3 id="special-offers" class="offer-title">
+        <span>Каждый четверг мы доставляем продукты с фермы в Москву. Готовы поделиться!</span>
+        </h3>
+
+
+    <div id="special-items" class="clearfix" style="width: 800px">
+         {% for c in categories %}
+
+         <div class="special-item">
+              {% thumbnail c.image "137x137" format='PNG' as im  %}
+                 <a href="">
+                  <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" align="left" title="{{ c.name }}" style="padding: 10px">
+                 </a>
+                  <h4 class="title">
+                  {{ c.name }}
+                  </h4>
+              {% endthumbnail %}
+
+
+        </div>
+
+     {% endfor %}
+
+
+    </div>
+
+
+    <div id="main-content">
+        <div id="main-content-bg">
+            <div id="main-content-bottom-bg" class="clearfix">
+                    <div id="left-area">
+                    <h3 id="recent-products" class="offer-title">
+                    <span>Готовим вместе: Рецепты ваши, продукты наши!</span>
+                    </h3>
+                        <div id="main-products" class="clearfix">
+
+                            {% for r in recepies %}
+
+                                 {% thumbnail r.image "213x160" as im  %}
+                                     <a title="{{ r.title }}" href="{{  r.get_absolute_url }}">
+                                      <img alt="{{ r.title }}" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" align="left" title="{{ c.name }}" style="padding: 10px">
+                                     </a>
+
+                                 {% endthumbnail %}
+
+
+
+                            {% endfor %}
+
+                        </div>
+                    </div>
+             </div>
+         </div
+    </div
 
 
 

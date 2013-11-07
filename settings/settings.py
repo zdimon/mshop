@@ -140,6 +140,7 @@ INSTALLED_APPS = (
     'registrations',
     'contact_form',
     'testimonials',
+    'captcha',
         # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
@@ -188,3 +189,8 @@ THUMBNAIL_ENGINE = 'sorl.thumbnail.engines.pil_engine.Engine'
 
 EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 EMAIL_FILE_PATH = '/tmp/app-messages' # change this to a proper location
+
+
+CAPTCHA_FONT_SIZE = 30
+CAPTCHA_LETTER_ROTATION = False
+CAPTCHA_NOISE_FUNCTIONS = False

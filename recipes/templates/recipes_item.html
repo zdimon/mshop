@@ -33,7 +33,28 @@
                   <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" align="left" style="padding: 10px">
                 {% endthumbnail %}
 
-            {{ item.content | safe }}
+            {{ item.desc | safe }}
+
+
+    <div style="clear: both"></div>
+
+    {% for com in comments %}
+       <p>
+           {{ com.author }}
+           {{ com.comment }}
+       </p>
+    {% endfor %}
+
+    {% if alert %}
+       <h1 style="color: red"> {{ alert }} </h1>
+    {% endif %}
+
+    <h1>Оставить комментарий</h1>
+    <form action="{% url 'recipes_item' item.pk %}" method="post">{% csrf_token %}
+     {{ form.as_p }}
+     <input type="submit" value="Сохранить" />
+     </form>
+
 
 
 {% endblock %}

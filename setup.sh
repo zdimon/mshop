@@ -16,6 +16,7 @@ sudo apt-get install python-pip
 sudo apt-get install git
 sudo apt-get install libpq-dev
 sudo apt-get install python-dev
+sudo apt-get install libfreetype6-dev
 
 sudo apt-get install libjpeg-dev
 sudo ln -s /usr/lib/x86_64-linux-gnu/libjpeg.so /usr/lib

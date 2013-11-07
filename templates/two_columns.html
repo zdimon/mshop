@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load staticfiles %}
-
+{% load right_sidebar %}
 {% block base_content %}
 
     <div id="top-area">
@@ -36,6 +36,7 @@
                         </td>
 
                         <td  valign="top">
+                             {% show_sidebar %}
                             <a target="_blank" href="http://breadmenu.ru">
                             <img title="Пекарня «Хлебное Меню»" alt="Хлебное Меню" src="{% static 'img/breadmenu.png' %}">
                             </a>

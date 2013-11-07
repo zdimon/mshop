@@ -1,0 +1,33 @@
+{% extends "two_columns.html" %}
+{% load thumbnail %}
+{% load staticfiles %}
+
+{% block meta_title %}
+  Отзывы
+{% endblock %}
+
+{% block meta_keyword %}
+  Отзывы
+{% endblock %}
+
+{% block meta_description %}
+  Отзывы
+{% endblock %}
+
+
+{% block page_title %}{{ testimonials.title }}{% endblock %}
+{% block page_slogan %}{% endblock %}
+
+{% block breadcrumbs %}
+     <a href="{% url 'home' %}">Отзывы</a>
+        <span class="raquo">»</span>
+          <a href="{% url 'news_list' %}"> Новости </a> <span class="raquo">»</span> {{ item.title }}
+{% endblock %}
+
+
+{% block main_content %}
+
+
+            {{ testimonials.content | safe }}
+
+{% endblock %}

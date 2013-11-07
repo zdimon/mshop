@@ -1,0 +1,41 @@
+{% extends "two_columns.html" %}
+{% load thumbnail %}
+{% load staticfiles %}
+
+{% block meta_title %}
+  Отзывы
+{% endblock %}
+
+{% block meta_keyword %}
+  Отзывы
+{% endblock %}
+
+{% block meta_description %}
+  Отзывы
+{% endblock %}
+
+
+{% block page_title %}Отзывы{% endblock %}
+{% block page_slogan %}{% endblock %}
+
+{% block breadcrumbs %}
+     <a href="{% url 'home' %}">Главная</a>
+        <span class="raquo">»</span>
+          <a href="{% url 'news_list' %}"> Отзывы </a>
+{% endblock %}
+
+
+{% block main_content %}
+
+{% for t in object_list %}
+
+        <h2><a href="{{ t.get_absolute_url }}">{{ t.title }}</a></h2>
+         <p>
+         {{ t.content|truncatewords_html:25 | safe }}
+         </p>
+         <p>{{ t.datetime }}</p>
+    {% empty %}
+    <p>Нет постов</p>
+    {% endfor %}
+
+{% endblock %}

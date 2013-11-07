@@ -19,9 +19,10 @@
 {% block page_slogan %}{% endblock %}
 
 {% block breadcrumbs %}
-     <a href="{% url 'home' %}">Отзывы</a>
+     <a href="{% url 'home' %}">Главная</a>
         <span class="raquo">»</span>
-          <a href="{% url 'news_list' %}"> Новости </a> <span class="raquo">»</span> {{ item.title }}
+    <a href="{% url 'testimonials_list' %}">Отзывы</a>
+         <span class="raquo">»</span> {{ testimonials.title }}
 {% endblock %}
 
 

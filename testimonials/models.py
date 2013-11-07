@@ -15,4 +15,4 @@ class Testimonials(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return "/отзыв/%i/" % self.id
+        return "/testimonials/%i/" % self.id

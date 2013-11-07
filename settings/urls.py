@@ -32,9 +32,9 @@ urlpatterns = patterns('',
 
     url(r'^accounts/', include('registrations.backends.default.urls')),
 
-    url(ur'^ферма/контакты', include('contact_form.urls')),
+    url(ur'^contact/', include('contact_form.urls')),
 
-    url(ur'^отзывы/', include('testimonials.urls')),
+    url(r'^testimonials/', include('testimonials.urls')),
 
 
     # Uncomment the admin/doc line below to enable admin documentation:

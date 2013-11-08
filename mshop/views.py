@@ -1,11 +1,12 @@
 #-*- coding: utf-8 -*-
 from django.template import loader, RequestContext
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from mshop.models import MshopCategories
 from mshop.models import MshopGoods
 from mshop.models import MshopGoodsPositions
-from django.shortcuts import redirect
-
+from django.shortcuts import redirect, render_to_response
+from mshop.forms import BasketForm
+from django.views.decorators.csrf import csrf_exempt
 
 def category_list(request):
     categories = MshopCategories.objects.all()
@@ -28,6 +29,25 @@ def good_show(request,id):
     c = RequestContext(request,{ 'good':good, 'basket': request.session.get('basket_good') })
     return HttpResponse(t.render(c))
 
+@csrf_exempt
+def basket_show(request):
+    form = BasketForm()
+    context = {}
+    bas_ses = request.session.get('basket_good')
+    bas = []
+    for b in bas_ses:
+        try:
+            t = MshopGoodsPositions.objects.get(pk=b)
+            bas.append(t)
+        except MshopGoodsPositions.DoesNotExist:
+            return None
+    context['basket'] = bas
+    context['form'] = form
+    return render_to_response('basket_show.html', context, RequestContext(request))
+
+def basket_clear(request):
+    request.session['basket_good'] = []
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER','/'))
 
 def good_put(request,id):
     p = MshopGoodsPositions.objects.get(pk=id)

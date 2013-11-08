@@ -1,4 +1,5 @@
 
+{% if basket_good %}
 <div style="border: 1px solid red; padding: 5px">
 Корзина
  {% for b in basket_good %}
@@ -6,10 +7,13 @@
        {{ b.good.name }} {{ b.name }}  {{ b.cost }}
      </p>
 
- {% empty %}
-    Ваша корзина пуста
+
  {% endfor %}
+
+ <a href="{% url 'basket_show' %}">Дальше</a>
+ <a href="{% url 'basket_clear' %}">Очистить</a>
 </div>
+{% endif %}
 
 
 <ul>

@@ -1,0 +1,64 @@
+{% extends "two_columns.html" %}
+{% load thumbnail %}
+{% block page_title %}Моя корзина{% endblock %}
+{% block page_slogan %}проверте пожалуйста ваш заказ{% endblock %}
+
+{% block breadcrumbs %}
+     <a href="{% url 'home' %}">Главная</a>
+        <span class="raquo">»</span>
+         <a href="{% url 'category_list' %}">  Каталог продуктов</a>
+         <span class="raquo">»</span>
+         Моя корзина
+{% endblock %}
+
+{% block main_content %}
+
+ {{ basket }}
+
+<form action="{% url 'basket_show' %}" method="post">
+{{ form.non_field_errors }}
+  <table border="1">
+  <tr>
+      <th>Наименование</th>
+      <th>Цена</th>
+      <th>Количество</th>
+      <th>Действие</th>
+  </tr>
+   {% for b in basket %}
+     <tr>
+       <td> {{ b.good.name }}  {{ b.name }} </td>
+       <td>{{ b.cost }} руб</td>
+       <td>1</td>
+       <td><a href="">Удалить</a></td>
+     </tr>
+    {% endfor %}
+  </table>
+
+   <div>
+        {{ form.name.errors }}
+        <label for="id_subject">ФИО:</label>
+        {{ form.name }}
+   </div>
+
+   <div>
+        {{ form.email.errors }}
+        <label for="id_subject">Email:</label>
+        {{ form.email }}
+   </div>
+
+   <div>
+        {{ form.phone.errors }}
+        <label for="id_subject">Телефон:</label>
+        {{ form.name }}
+   </div>
+
+   <div>
+        {{ form.address.errors }}
+        <label for="id_subject">Адрес:</label>
+        {{ form.address }}
+   </div>
+   <p><input type="submit" value="Сохранить" /></p>
+
+</form>
+
+{% endblock %}

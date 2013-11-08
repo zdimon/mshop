@@ -43,6 +43,8 @@ urlpatterns = patterns('',
     url(ur'^каталог/(?P<id>\d+)/$', 'mshop.views.category_show', name='category_show'),
     url(ur'^товар/(?P<id>\d+)/$', 'mshop.views.good_show', name='good_show'),
     url(ur'^в-корзину/(?P<id>\d+)/$', 'mshop.views.good_put', name='good_put'),
+    url(ur'^моя-корзина/$', 'mshop.views.basket_show', name='basket_show'),
+     url(ur'^очистить-корзинку/$', 'mshop.views.basket_clear', name='basket_clear'),
     #####################################
 
     # Uncomment the admin/doc line below to enable admin documentation:

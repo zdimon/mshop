@@ -4,6 +4,7 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 THUMBNAIL_DEBUG = True
 
+INTERNAL_IPS = ('127.0.0.1',)
 
 PROJECT_PATH = os.path.split(os.path.abspath(os.path.dirname(__file__)))[0]
 
@@ -103,6 +104,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
@@ -141,6 +143,7 @@ INSTALLED_APPS = (
     'contact_form',
     'testimonials',
     'captcha',
+    'debug_toolbar',
         # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
@@ -196,3 +199,6 @@ CAPTCHA_LETTER_ROTATION = False
 CAPTCHA_NOISE_FUNCTIONS = False
 
 SESSION_SAVE_EVERY_REQUEST=True
+
+
+

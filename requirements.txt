@@ -10,3 +10,4 @@ django-tinymce
 sorl-thumbnail==11.12
 django-registration
 django-simple-captcha
+django-debug-toolbar

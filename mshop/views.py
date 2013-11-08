@@ -25,13 +25,28 @@ def category_show(request,id):
 def good_show(request,id):
     good = MshopGoods.objects.get(pk=id)
     t = loader.get_template('good_show.html')
-    c = RequestContext(request,{ 'good':good, 'count': request.session.get('count') })
+    c = RequestContext(request,{ 'good':good, 'basket': request.session.get('basket_good') })
     return HttpResponse(t.render(c))
 
 
 def good_put(request,id):
     p = MshopGoodsPositions.objects.get(pk=id)
-    request.session['count'] = 'ggggggggg'
+
+    if not 'basket_good' in request.session:
+        request.session['basket_good'] = []
+    else:
+        sbb = request.session['basket_good']
+        sbb.append(int(id))
+        request.session['basket_good'] = sbb
+
+    if not 'basket_count' in request.session:
+        request.session['basket_count'] = []
+    else:
+        sbb = request.session['basket_count']
+        sbb.append(1)
+        request.session['basket_count'] = sbb
+
+
 
     #response = HttpResponse( 'blah' )
     #response.set_cookie( 'basket', 'ffffffffffffffffffffffff' )

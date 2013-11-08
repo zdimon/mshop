@@ -1,3 +1,17 @@
+
+<div style="border: 1px solid red; padding: 5px">
+Корзина
+ {% for b in basket_good %}
+     <p>
+       {{ b.good.name }} {{ b.name }}  {{ b.cost }}
+     </p>
+
+ {% empty %}
+    Ваша корзина пуста
+ {% endfor %}
+</div>
+
+
 <ul>
 {% for c in cats %}
   <li> <a href="{{ c.get_absolute_url }}">{{ c.name }}</a></li>

@@ -194,3 +194,5 @@ EMAIL_FILE_PATH = '/tmp/app-messages' # change this to a proper location
 CAPTCHA_FONT_SIZE = 30
 CAPTCHA_LETTER_ROTATION = False
 CAPTCHA_NOISE_FUNCTIONS = False
+
+SESSION_SAVE_EVERY_REQUEST=True

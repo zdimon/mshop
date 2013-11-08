@@ -47,7 +47,7 @@
 
          <div class="special-item">
               {% thumbnail c.image "137x137" format='PNG' as im  %}
-                 <a href="">
+                 <a href="{{ c.get_absolute_url }}">
                   <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" align="left" title="{{ c.name }}" style="padding: 10px">
                  </a>
                   <h4 class="title">

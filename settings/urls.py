@@ -13,7 +13,7 @@ urlpatterns = patterns('',
      url(ur'^о-нас$', 'page.views.page_show', {'slug': 'about_us'}, name='about_us'),
      url(ur'^доставка$', 'page.views.page_show', {'slug': 'delivery'}, name='delivery'),
      url(ur'^гарантия-качества$', 'page.views.page_show', {'slug': 'quality'}, name='quality'),
-     url(r'^list$','mshop.views.category_list',name='category_list'),
+
     # url(r'^settings/', include('settings.foo.urls')),
 
     # новости############
@@ -37,6 +37,13 @@ urlpatterns = patterns('',
     url(r'^testimonials/', include('testimonials.urls')),
 
     url(r'^captcha/', include('captcha.urls')),
+
+    #######Магазин#####################
+     url(ur'^наша/продукция$','mshop.views.category_list',name='category_list'),
+    url(ur'^каталог/(?P<id>\d+)/$', 'mshop.views.category_show', name='category_show'),
+    url(ur'^товар/(?P<id>\d+)/$', 'mshop.views.good_show', name='good_show'),
+    url(ur'^в-корзину/(?P<id>\d+)/$', 'mshop.views.good_put', name='good_put'),
+    #####################################
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

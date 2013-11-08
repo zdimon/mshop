@@ -1,37 +1,35 @@
 {% extends "two_columns.html" %}
 {% load thumbnail %}
-
 {% block page_title %}Наша продукция{% endblock %}
 {% block page_slogan %}мы предлагаем только свежие продукты собственного производства{% endblock %}
 
 {% block breadcrumbs %}
      <a href="{% url 'home' %}">Главная</a>
         <span class="raquo">»</span>
-          Каталог продуктов
-
+         <a href="{% url 'category_list' %}">  Каталог продуктов</a>
+         <span class="raquo">»</span>
+        {{ category.name }}
 {% endblock %}
 
 {% block main_content %}
 
 
 
-
-         {% for c in categories %}
-
-         <div class="special-item">
-              {% thumbnail c.image "137x137" format='PNG' as im  %}
-                 <a href="{{ c.get_absolute_url }}">
+{%  for g in goods %}
+<div class="special-item">
+                {% thumbnail g.image "137x137" format='PNG' as im  %}
+                 <a href="{{ g.get_absolute_url }}">
                   <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" align="left" title="{{ c.name }}" style="padding: 10px">
                  </a>
                   <h4 class="title">
-                  {{ c.name }}
+                  {{ g.name }}
                   </h4>
               {% endthumbnail %}
+    </div>
+
+{% endfor %}
 
 
-        </div>
-
-          {% endfor %}
 
 
 

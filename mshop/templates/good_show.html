@@ -1,0 +1,34 @@
+{% extends "two_columns.html" %}
+{% load thumbnail %}
+{% block page_title %}{{ good.name }}{% endblock %}
+{% block page_slogan %}{% endblock %}
+
+{% block breadcrumbs %}
+     <a href="{% url 'home' %}">Главная</a>
+        <span class="raquo">»</span>
+         <a href="{% url 'category_list' %}">  Каталог продуктов</a>
+         <span class="raquo">»</span>
+         <a href="{{ good.category.get_absolute_url }}"> {{ good.category.name }}</a>
+         <span class="raquo">»</span>
+        {{ good.name }}
+{% endblock %}
+
+{% block main_content %}
+
+                {% thumbnail good.image "237x237" format='PNG' as im  %}
+                 <div style="align: right">
+                  <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" align="left" title="{{ c.name }}" style="padding: 10px">
+                </div>
+
+              {% endthumbnail %}
+
+     <ul>
+     {% for p in good.mshopgoodspositions_set.all %}
+       <li>{{ p.name }} - {{ p.cost }} руб/кг  {{ p.descr }} <a href="{% url 'good_put' p.pk %}" >Кинуть в корзинку</a></li>
+     {% endfor %}
+    </ul>
+{{ good.description | safe }}
+
+    eee: {{ count }}
+
+{% endblock %}

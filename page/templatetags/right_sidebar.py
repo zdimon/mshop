@@ -12,12 +12,14 @@ def show_sidebar(context):
     # возвращаем наши объекты в шаблон
     request = context['request']
     bas = []
-    for b in request.session['basket_good']:
-        try:
-            t = MshopGoodsPositions.objects.get(pk=b)
-            bas.append(t)
-        except MshopGoodsPositions.DoesNotExist:
-           return None
+    if 'basket_good' in request.session:
+        for b in request.session['basket_good']:
+            try:
+                t = MshopGoodsPositions.objects.get(pk=b)
+                bas.append(t)
+            except MshopGoodsPositions.DoesNotExist:
+               return None
 
-    return {'cats': cats, 'basket_good': bas, 'basket_count':  request.session['basket_count']}
+
+    return {'cats': cats, 'basket_good': bas}
 

@@ -39,14 +39,7 @@ def good_put(request,id):
         sbb.append(int(id))
         request.session['basket_good'] = sbb
 
-    if not 'basket_count' in request.session:
-        request.session['basket_count'] = []
-    else:
-        sbb = request.session['basket_count']
-        sbb.append(1)
-        request.session['basket_count'] = sbb
-
-
+  
 
     #response = HttpResponse( 'blah' )
     #response.set_cookie( 'basket', 'ffffffffffffffffffffffff' )

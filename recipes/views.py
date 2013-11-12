@@ -25,8 +25,6 @@ def recipes_item(request,id):
     if request.method == 'POST':
         form = CommentForm(request.POST)
         if form.is_valid():
-            # Process the data in form.cleaned_data
-            # ...
             pars['alert'] = u'Запись сохранена'
             form.save()
             form = CommentForm(initial={'recipe_id': item.pk})

@@ -144,6 +144,7 @@ INSTALLED_APPS = (
     'testimonials',
     'captcha',
     'debug_toolbar',
+    'utils',
         # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )

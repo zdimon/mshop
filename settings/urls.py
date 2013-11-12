@@ -39,12 +39,13 @@ urlpatterns = patterns('',
     url(r'^captcha/', include('captcha.urls')),
 
     #######Магазин#####################
-     url(ur'^наша/продукция$','mshop.views.category_list',name='category_list'),
+    url(ur'^наша/продукция$','mshop.views.category_list',name='category_list'),
     url(ur'^каталог/(?P<id>\d+)/$', 'mshop.views.category_show', name='category_show'),
     url(ur'^товар/(?P<id>\d+)/$', 'mshop.views.good_show', name='good_show'),
     url(ur'^в-корзину/(?P<id>\d+)/$', 'mshop.views.good_put', name='good_put'),
     url(ur'^моя-корзина/$', 'mshop.views.basket_show', name='basket_show'),
-     url(ur'^очистить-корзинку/$', 'mshop.views.basket_clear', name='basket_clear'),
+    url(ur'^очистить-корзинку/$', 'mshop.views.basket_clear', name='basket_clear'),
+    url(ur'^удалить-из-корзинки/(?P<id>\d+)/$', 'mshop.views.basket_pop', name='basket_pop'),
     #####################################
 
     # Uncomment the admin/doc line below to enable admin documentation:
@@ -54,3 +55,9 @@ urlpatterns = patterns('',
      url(r'^admin/', include(admin.site.urls)),
 )+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
+if settings.DEBUG:
+    urlpatterns += patterns('',
+        url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {
+            'document_root': settings.MEDIA_ROOT,
+        }),
+   )

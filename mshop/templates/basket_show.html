@@ -1,4 +1,5 @@
 {% extends "two_columns.html" %}
+{% load get_range %}
 {% load thumbnail %}
 {% block page_title %}Моя корзина{% endblock %}
 {% block page_slogan %}проверте пожалуйста ваш заказ{% endblock %}
@@ -13,7 +14,6 @@
 
 {% block main_content %}
 
- {{ basket }}
 
 <form action="{% url 'basket_show' %}" method="post">
 {{ form.non_field_errors }}
@@ -28,8 +28,15 @@
      <tr>
        <td> {{ b.good.name }}  {{ b.name }} </td>
        <td>{{ b.cost }} руб</td>
-       <td>1</td>
-       <td><a href="">Удалить</a></td>
+       <td>
+          <input hidden="idp" value="{{ b.id }}">
+          <select name="cnt[]">
+              {% for i in 10|get_range %}
+                  <option {% if b.cnt == i %} selected {% endif %} value="{{ i }}">{{ i }}</option>
+              {% endfor %}
+          </select>
+       </td>
+       <td><a href="{% url 'basket_pop' b.id  %}">Удалить</a></td>
      </tr>
     {% endfor %}
   </table>
@@ -49,7 +56,13 @@
    <div>
         {{ form.phone.errors }}
         <label for="id_subject">Телефон:</label>
-        {{ form.name }}
+        {{ form.phone }}
+   </div>
+
+   <div>
+        {{ form.city.errors }}
+        <label for="id_subject">Город:</label>
+        {{ form.city }}
    </div>
 
    <div>
@@ -57,6 +70,36 @@
         <label for="id_subject">Адрес:</label>
         {{ form.address }}
    </div>
+
+   <div>
+        {{ form.description.errors }}
+        <label for="id_subject">Комментарий:</label>
+        {{ form.description }}
+   </div>
+
+
+
+   <div >
+        Регистрировать?
+       <input type="checkbox" onclick="$('#reg_block').toggle('slow');" >
+   </div>
+
+   <div id="reg_block" style="display: none">
+   <div>
+        {{ form.login.errors }}
+        <label for="id_subject">Логин:</label>
+        {{ form.login }}
+   </div>
+
+
+   <div>
+        {{ form.password.errors }}
+        <label for="id_subject">Пароль:</label>
+        {{ form.password }}
+   </div>
+   </div>
+
+
    <p><input type="submit" value="Сохранить" /></p>
 
 </form>

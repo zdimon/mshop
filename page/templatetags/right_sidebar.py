@@ -12,9 +12,10 @@ def show_sidebar(context):
     # возвращаем наши объекты в шаблон
     request = context['request']
     bas = []
-    sgood = request.session['basket_good']
-    scount = request.session['basket_count']
+
     if 'basket_good' in request.session:
+        sgood = request.session['basket_good']
+        scount = request.session['basket_count']
         for b in request.session['basket_good']:
             try:
                 t = MshopGoodsPositions.objects.get(pk=b)

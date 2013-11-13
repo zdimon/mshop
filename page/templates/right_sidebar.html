@@ -4,8 +4,8 @@
 Корзина
  {% for b in basket_good %}
      <p>
-       {{ b.good.name }} {{ b.name }}  {{ b.cost }} <br />
-       {{ b.cnt }}
+       {{ b.good.name }} {{ b.name }}  {{ b.cost }} руб/{{ b.good.masure }} <br />
+       {{ b.cnt }} {{ b.good.masure }}
      </p>
 
 

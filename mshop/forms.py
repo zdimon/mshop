@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from django import  forms
-from mshop.models import MshopBasket, MshopBasketPositions
+from mshop.models import MshopBasket, MshopBasketPositions, MshopGoodsPositions
 
 
 attrs_dict = { 'class': 'required' }
@@ -39,18 +39,26 @@ class BasketForm(forms.Form):
 
     def save(self,post):
         data = self.cleaned_data
-        import pdb; pdb.set_trace()
+
         b = MshopBasket.objects.create(
             phone = data['phone'],
             name  = data['name'],
-            address = data ['address']
+            address = data ['address'],
+            description = data ['description'],
+            city = data ['city'],
+            email = data ['email'],
         )
+        ids = post.getlist('idp[]')
+        for i in ids:
+            try:
+                gp = MshopGoodsPositions.objects.get(pk = int(i))
+            except: TypeError
+                pass
+            bp = MshopBasketPositions.objects.create(
+                position = gp,
+            )
+            bp.save()
+        import pdb; pdb.set_trace()
+        b.save()
 
 
-        c = RecipesComments.objects.create(
-           author = data['name'],
-           comment = data['message'],
-           recipe_id = data['recipe_id'],
-           datetime = datetime.date.today()
-        )
-        c.save()

@@ -1,0 +1,91 @@
+{% extends "two_columns.html" %}
+{% block meta_title %}
+  Подтверждение заказа
+{% endblock %}
+
+
+
+{% load thumbnail %}
+{% block page_title %}Подтвердите Ваш заказ{% endblock %}
+{% block page_slogan %}{% endblock %}
+{% load multiply %}
+
+{% block breadcrumbs %}
+     <a href="{% url 'home' %}">Главная</a>
+        <span class="raquo">»</span>
+         <a href="{% url 'category_list' %}">  Каталог продуктов</a>
+         <span class="raquo">»</span>
+           Мой заказ
+
+{% endblock %}
+
+{% block main_content %}
+      <h2>Информация о заказе</h2>
+            <table>
+              <tr>
+                  <th>Товар</th>
+                  <th>Цена</th>
+                  <th>Количество</th>
+                  <th>Стоимость</th>
+              </tr>
+               {% for p in o.mshopbasketpositions_set.all  %}
+
+                   <tr>
+                     <td>{{ p.position.good.name }}  {{ p.position.name }} </td>
+                     <td> {{ p.position.cost }} руб/{{ p.position.good.masure }}</td>
+                     <td>{{ p.ammount }} {{ p.position.good.masure }}</td>
+                     <td>{{ p.ammount|multiply:p.position.cost  }} руб</td>
+                   </tr>
+               {% endfor %}
+               <tr>
+                  <th>Итого</th>
+                  <th></th>
+                  <th></th>
+                  <th>{{ all }} руб</th>
+              </tr>
+            </table>
+
+      <h2>Информация о покупателе</h2>
+            <table>
+
+                   <tr>
+                     <th>ФИО</th>
+                     <td>{{ o.name }}</td>
+                   </tr>
+
+                   <tr>
+                     <th>Email</th>
+                     <td>{{ o.email }}</td>
+                   </tr>
+
+                   <tr>
+                     <th>Телефон</th>
+                     <td>{{ o.phone }}</td>
+                   </tr>
+
+                   <tr>
+                     <th>Город</th>
+                     <td>{{ o.city }}</td>
+                   </tr>
+
+                   <tr>
+                     <th>Адресс</th>
+                     <td>{{ o.address }}</td>
+                   </tr>
+
+                   <tr>
+                     <th>Примечание</th>
+                     <td>{{ o.description }}</td>
+                   </tr>
+
+
+
+
+            </table>
+
+     <a href="{% url 'order_confirm' o.id %}">Подтвердить заказ</a>
+     <a href="{% url 'order_delete' o.id %}">Удалить заказ</a>
+
+
+
+{% endblock %}

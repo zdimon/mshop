@@ -3,6 +3,8 @@ import os
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 THUMBNAIL_DEBUG = True
+EMAIL_ADMIN = 'admin@email.com'
+EMAIL_NOREPLY = 'noreply@email.com'
 
 INTERNAL_IPS = ('127.0.0.1',)
 

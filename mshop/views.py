@@ -3,10 +3,12 @@ from django.template import loader, RequestContext
 from django.http import HttpResponse, HttpResponseRedirect
 from mshop.models import MshopCategories
 from mshop.models import MshopGoods
-from mshop.models import MshopGoodsPositions
+from mshop.models import MshopGoodsPositions, MshopBasket, MshopBasketPositions
 from django.shortcuts import redirect, render_to_response
 from mshop.forms import BasketForm
 from django.views.decorators.csrf import csrf_exempt
+from django.core.mail import send_mail
+from settings.settings import EMAIL_ADMIN, EMAIL_NOREPLY
 
 def category_list(request):
     categories = MshopCategories.objects.all()
@@ -51,9 +53,12 @@ def basket_show(request):
         form = BasketForm(request.POST)
         if form.is_valid():
             request.session['alert'] = u'Запись сохранена'
-            form.save(request.POST)
-
+            o = form.save(request.POST,request)
+            request.session['basket_good'] = []
+            request.session['basket_count'] = []
+            return redirect('order_show', id=o.id)
     context['form'] = form
+
     return render_to_response('basket_show.html', context, RequestContext(request))
 
 def basket_clear(request):
@@ -100,3 +105,31 @@ def basket_pop(request,id):
         request.session['basket_good'] = sbg
         request.session['basket_count'] = sbc
     return HttpResponseRedirect(request.META.get('HTTP_REFERER','/'))
+
+
+def order_show(request,id):
+    all = 0
+    try:
+        o = MshopBasket.objects.get(pk=id)
+    except ValueError:
+        pass
+    pos = MshopBasketPositions.objects.all().filter(basket_id = o.id)
+    for p in pos:
+        all = all + (p.ammount*p.position.cost)
+    #import pdb; pdb.set_trace()
+    return render_to_response('order_show.html', {'o':o, 'all':all}, RequestContext(request))
+
+def order_confirm(request,id):
+    try:
+        o = MshopBasket.objects.get(pk=id)
+    except ValueError:
+        pass
+    send_mail(u'Новый заказ', u'Поступил новый заказ', EMAIL_NOREPLY, [EMAIL_ADMIN])
+    return redirect('order_show', id=o.id)
+
+def order_delete(request,id):
+    try:
+        o = MshopBasket.objects.get(pk=id)
+    except ValueError:
+        pass
+    return redirect('order_show', id=o.id)

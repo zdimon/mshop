@@ -2,8 +2,8 @@
 
 from django import  forms
 from mshop.models import MshopBasket, MshopBasketPositions, MshopGoodsPositions
-
-
+from django.contrib.auth.models import User
+from django.contrib import auth
 attrs_dict = { 'class': 'required' }
 
 
@@ -37,7 +37,7 @@ class BasketForm(forms.Form):
                            widget=forms.TextInput(),
                            label=u'Пароль')
 
-    def save(self,post):
+    def save(self,post,request):
         data = self.cleaned_data
 
         b = MshopBasket.objects.create(
@@ -49,16 +49,26 @@ class BasketForm(forms.Form):
             email = data ['email'],
         )
         ids = post.getlist('idp[]')
+        idc = post.getlist('cnt[]')
         for i in ids:
             try:
                 gp = MshopGoodsPositions.objects.get(pk = int(i))
-            except: TypeError
+            except TypeError:
                 pass
+            indx = ids.index(i)
             bp = MshopBasketPositions.objects.create(
                 position = gp,
+                ammount = idc[indx],
+                basket = b,
             )
             bp.save()
-        import pdb; pdb.set_trace()
+        #import pdb; pdb.set_trace()
         b.save()
+        if len(post['login'])>0 and len(post['password'])>0:
+            user = User.objects.create_user(username=post['login'], email=post['email'],password=post['password'])
+            user.save()
+            user = auth.authenticate(username=post['login'], password=post['password'])
+            auth.login(request, user)
+        return b
 
 

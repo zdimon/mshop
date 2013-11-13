@@ -71,6 +71,8 @@ class MshopBasket(models.Model):
     user = models.IntegerField(default=False)
 
     datetime = models.DateField(auto_now_add=True)
+    def get_absolute_url(self):
+        return u"/заказ/%i/" % self.id
     def __unicode__(self):
         return self.phone
     class Meta:
@@ -79,6 +81,7 @@ class MshopBasket(models.Model):
 
 class MshopBasketPositions(models.Model):
     position = models.ForeignKey('MshopGoodsPositions')
+    basket = models.ForeignKey('MshopBasket')
     ammount = models.IntegerField(verbose_name=u'Количество', blank=False)
 
 

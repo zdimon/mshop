@@ -17,6 +17,14 @@ class MshopCategories(models.Model):
 
 
 class MshopGoods(models.Model):
+    TYPE_MESURE = (
+        (u'кг.', u'кг.'),
+        (u'шт.', u'шт.'),
+    )
+    masure = models.CharField(verbose_name=u'Единицы измерения',
+                                    choices=TYPE_MESURE,
+                                    default='кг.',
+                                    max_length=6)
     category = models.ForeignKey('MshopCategories')
     name = models.CharField(max_length=250, verbose_name=u"Наименование", blank=False)
     image  = models.ImageField(upload_to='goods', verbose_name=u'Изображение', blank=True)
@@ -52,10 +60,17 @@ class MshopBasket(models.Model):
                                     default='new',
                                     max_length=10)
     session = models.CharField(max_length=250, verbose_name=u'Сессия', blank=True)
+
     phone = models.CharField(max_length=250, verbose_name=u'Телефон', blank=False)
     name = models.CharField(max_length=250, verbose_name=u'Имя' , blank=False)
     address = models.CharField(max_length=250, verbose_name=u'Адресс', blank=False)
-    datetime = models.DateField()
+
+    description = models.TextField(blank=True, default=False)
+    city = models.CharField(max_length=250, verbose_name=u'Город', blank=False, default=False)
+    email = models.EmailField(verbose_name=u'Email', blank=False, default=False)
+    user = models.IntegerField(default=False)
+
+    datetime = models.DateField(auto_now_add=True)
     def __unicode__(self):
         return self.phone
     class Meta:

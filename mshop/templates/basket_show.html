@@ -29,9 +29,9 @@
        <td> {{ b.good.name }}  {{ b.name }} </td>
        <td>{{ b.cost }} руб</td>
        <td>
-          <input hidden="idp" value="{{ b.id }}">
+          <input type="hidden" name="idp[]" value="{{ b.id }}">
           <select name="cnt[]">
-              {% for i in 10|get_range %}
+              {% for i in 201|get_range %}
                   <option {% if b.cnt == i %} selected {% endif %} value="{{ i }}">{{ i }}</option>
               {% endfor %}
           </select>

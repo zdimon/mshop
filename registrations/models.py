@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import datetime
 import hashlib
 import random
@@ -181,12 +182,20 @@ class RegistrationProfile(models.Model):
     
     user = models.ForeignKey(User, unique=True, verbose_name=_('user'))
     activation_key = models.CharField(_('activation key'), max_length=40)
-    
+
+    city = models.CharField(max_length=250, verbose_name=u'Город', blank=False, default=False)
+    phone = models.CharField(max_length=250, verbose_name=u'Телефон', blank=False, default=False)
+    name = models.CharField(max_length=250, verbose_name=u'Имя' , blank=False, default=False)
+    address = models.CharField(max_length=250, verbose_name=u'Адресс', blank=False, default=False)
+    description = models.TextField(blank=True, default=False)
+    email = models.EmailField(verbose_name=u'Email', blank=False, default=False)
+
+
     objects = RegistrationManager()
     
     class Meta:
-        verbose_name = _('registrations profile')
-        verbose_name_plural = _('registrations profiles')
+        verbose_name = _(u'Пользователь')
+        verbose_name_plural = _(u'Пользователи')
     
     def __unicode__(self):
         return u"Registration information for %s" % self.user

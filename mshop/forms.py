@@ -4,6 +4,7 @@ from django import  forms
 from mshop.models import MshopBasket, MshopBasketPositions, MshopGoodsPositions
 from django.contrib.auth.models import User
 from django.contrib import auth
+from registrations.models import RegistrationProfile
 attrs_dict = { 'class': 'required' }
 
 
@@ -68,6 +69,8 @@ class BasketForm(forms.Form):
             user = User.objects.create_user(username=post['login'], email=post['email'],password=post['password'])
             user.save()
             user = auth.authenticate(username=post['login'], password=post['password'])
+            p = RegistrationProfile.objects.create(user=user, name=post['name'], email=post['email'],city=post['city'],address=post['address'],description=post['description'],phone=post['phone'])
+            p.save()
             auth.login(request, user)
         return b
 

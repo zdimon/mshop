@@ -1,14 +1,15 @@
 # -*- coding: utf-8 -*-
 from django.db import models
+from tinymce import models as tinymce_models
 
 # Create your models here.
 class Recipe(models.Model):
     title = models.CharField(max_length=250, verbose_name=u'Заголовок')
     image  = models.ImageField(upload_to='recipe',verbose_name=u'Изображение',blank=True)
-    desc = models.TextField(verbose_name=u'Описание')
-    time = models.IntegerField(verbose_name=u'Время приготовления')
-    authors = models.TextField(verbose_name=u'Авторы')
-    ingradients = models.TextField(verbose_name=u'Инградиенты')
+    desc = tinymce_models.HTMLField(verbose_name=u'Описание')
+    time = models.CharField(verbose_name=u'Время приготовления',max_length=250)
+    authors = tinymce_models.HTMLField(verbose_name=u'Авторы')
+    ingradients = tinymce_models.HTMLField(verbose_name=u'Инградиенты')
     datetime = models.DateTimeField(u'Дата публикации')
     def __unicode__(self):
         return self.title
@@ -26,6 +27,7 @@ class RecipesSteps(models.Model):
         return self.title
     class Meta:
         verbose_name_plural = u'Шаги'
+        ordering = ['id']
 
 class RecipesComments(models.Model):
     recipe = models.ForeignKey('Recipe')

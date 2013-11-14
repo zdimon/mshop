@@ -21,7 +21,7 @@
 
 {% block main_content %}
       <h2>Информация о заказе</h2>
-            <table>
+            <table width="100%" class="table_style">
               <tr>
                   <th>Товар</th>
                   <th>Цена</th>
@@ -44,37 +44,37 @@
                   <th>{{ all }} руб</th>
               </tr>
             </table>
-
+<p></p>
       <h2>Информация о покупателе</h2>
-            <table>
+            <table width="100%" class="table_style">
 
                    <tr>
-                     <th>ФИО</th>
+                     <td>ФИО</td>
                      <td>{{ o.name }}</td>
                    </tr>
 
                    <tr>
-                     <th>Email</th>
+                     <td>Email</td>
                      <td>{{ o.email }}</td>
                    </tr>
 
                    <tr>
-                     <th>Телефон</th>
+                     <td>Телефон</td>
                      <td>{{ o.phone }}</td>
                    </tr>
 
                    <tr>
-                     <th>Город</th>
+                     <td>Город</td>
                      <td>{{ o.city }}</td>
                    </tr>
 
                    <tr>
-                     <th>Адресс</th>
+                     <td>Адресс</td>
                      <td>{{ o.address }}</td>
                    </tr>
 
                    <tr>
-                     <th>Примечание</th>
+                     <td>Примечание</td>
                      <td>{{ o.description }}</td>
                    </tr>
 
@@ -82,10 +82,11 @@
 
 
             </table>
-
+<p></p>
+     <div style="text-align: center; font-size: 20px">
      <a href="{% url 'order_confirm' o.id %}">Подтвердить заказ</a>
      <a href="{% url 'order_delete' o.id %}">Удалить заказ</a>
-
+</div>
 
 
 {% endblock %}

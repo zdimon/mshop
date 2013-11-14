@@ -9,6 +9,19 @@ from mshop.forms import BasketForm
 from django.views.decorators.csrf import csrf_exempt
 from django.core.mail import send_mail
 from settings.settings import EMAIL_ADMIN, EMAIL_NOREPLY
+from django.views.generic import ListView
+from django.contrib import messages
+
+class OrdersView(ListView):
+    queryset = MshopBasket.objects.all().order_by('-id')
+    template_name = 'orders_list.html'
+    paginate_by = 10
+
+def products_list(request):
+    products = MshopGoods.objects.all()
+    t = loader.get_template('products_list.html')
+    c = RequestContext(request,{'products': products})
+    return HttpResponse(t.render(c))
 
 def category_list(request):
     categories = MshopCategories.objects.all()
@@ -37,25 +50,35 @@ def basket_show(request):
     bas_ses = request.session.get('basket_good')
     cnt_ses = request.session.get('basket_count')
     bas = []
-    for b in bas_ses:
-        try:
-            t = MshopGoodsPositions.objects.get(pk=b)
-            indx = bas_ses.index(b)
-            t.cnt = cnt_ses[indx]
-            bas.append(t)
-        except MshopGoodsPositions.DoesNotExist:
-            return None
+    if bas_ses:
+        for b in bas_ses:
+            try:
+                t = MshopGoodsPositions.objects.get(pk=b)
+                indx = bas_ses.index(b)
+                t.cnt = cnt_ses[indx]
+                bas.append(t)
+            except MshopGoodsPositions.DoesNotExist:
+                return None
     context['basket'] = bas
-    form = BasketForm()
+    if request.user.is_authenticated():
+        form = BasketForm(initial={'email':request.user.get_profile().email,
+                                   'phone':request.user.get_profile().phone,
+                                   'city':request.user.get_profile().city,
+                                   'address':request.user.get_profile().address,
+                                   'description':request.user.get_profile().description,
+                                   'name':request.user.get_profile().name}
+            )
+    else:
+        form = BasketForm()
     # Сохранение формы
 
     if request.method == 'POST':
         form = BasketForm(request.POST)
         if form.is_valid():
-            request.session['alert'] = u'Запись сохранена'
             o = form.save(request.POST,request)
             request.session['basket_good'] = []
             request.session['basket_count'] = []
+            messages.success(request, "Заказ сохранен. Подтвердите его корректность.")
             return redirect('order_show', id=o.id)
     context['form'] = form
 
@@ -90,7 +113,7 @@ def good_put(request,id):
     request.session['basket_good'] = sbb
     request.session['basket_count'] = sbc
 
-
+    messages.success(request, "Товар был добавлен в корзину.")
     #response = HttpResponse( 'blah' )
     #response.set_cookie( 'basket', 'ffffffffffffffffffffffff' )
     return redirect(p.good)
@@ -124,6 +147,7 @@ def order_confirm(request,id):
         o = MshopBasket.objects.get(pk=id)
     except ValueError:
         pass
+    messages.success(request, "Спасибо что подтвердили ваш заказ. В ближайшее время мы с вами свяжимся.")
     send_mail(u'Новый заказ', u'Поступил новый заказ', EMAIL_NOREPLY, [EMAIL_ADMIN])
     return redirect('order_show', id=o.id)
 
@@ -132,4 +156,6 @@ def order_delete(request,id):
         o = MshopBasket.objects.get(pk=id)
     except ValueError:
         pass
-    return redirect('order_show', id=o.id)
+    o.delete()
+    messages.success(request, "Ваш заказ был удален.")
+    return redirect('orders_list')

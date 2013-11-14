@@ -3,6 +3,8 @@
 {% load right_sidebar %}
 {% block base_content %}
 
+
+
     <div id="top-area">
 		<div id="top-area-bg">
 			<div id="bottom-area-bg">
@@ -30,7 +32,17 @@
 
                 <table>
                     <tr>
-                        <td width="700" valign="top">
+                        <td width="700" valign="top" style="padding-right: 20px">
+                            {% if messages %}
+                            <ul class="messages">
+                            {% for message in messages %}
+                                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                                    {{ message }}
+                                </li>
+                            {% endfor %}
+                            </ul>
+                           {% endif %}
+
                             {% block main_content %}
                             {% endblock %}
                         </td>

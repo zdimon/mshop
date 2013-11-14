@@ -49,15 +49,15 @@ class MshopGoodsPositions(models.Model):
 class MshopBasket(models.Model):
 
     TYPE_CHOICES = (
-        ('new', u'Новый'),
-        ('paid', u'Оплачен'),
-        ('onway', u'Доставка'),
-        ('done', u'Доставлен'),
-        ('rejected', u'Отказ'),
+        (u'Новый', u'Новый'),
+        (u'Оплачен', u'Оплачен'),
+        (u'Доставка', u'Доставка'),
+        (u'Доставлен', u'Доставлен'),
+        (u'Отказ', u'Отказ'),
     )
     basket_type = models.CharField(verbose_name=u'Статус заказа',
                                     choices=TYPE_CHOICES,
-                                    default='new',
+                                    default=u'Новый',
                                     max_length=10)
     session = models.CharField(max_length=250, verbose_name=u'Сессия', blank=True)
 
@@ -75,13 +75,23 @@ class MshopBasket(models.Model):
         return u"/заказ/%i/" % self.id
     def __unicode__(self):
         return self.phone
+
+    @property
+    def cost(self):
+        r = 0
+        pos = MshopBasketPositions.objects.all().filter(basket_id=self.id)
+        #import pdb; pdb.set_trace()
+        for i in pos:
+            r = r + (i.position.cost*i.ammount)
+        return r
+
     class Meta:
         verbose_name_plural = u'Заказы'
         verbose_name = u'заказ'
 
 class MshopBasketPositions(models.Model):
     position = models.ForeignKey('MshopGoodsPositions')
-    basket = models.ForeignKey('MshopBasket')
+    basket = models.ForeignKey('MshopBasket', default=False)
     ammount = models.IntegerField(verbose_name=u'Количество', blank=False)
 
 

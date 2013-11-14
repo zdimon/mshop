@@ -1,0 +1,53 @@
+{% extends "two_columns.html" %}
+{% load thumbnail %}
+
+{% block meta_title %}
+  Наша продукция | Усадьба Княжичи
+{% endblock %}
+
+{% block meta_keyword %}
+  Наша продукция | Усадьба Княжичи
+{% endblock %}
+
+{% block meta_description %}
+  Наша продукция | Усадьба Княжичи
+{% endblock %}
+
+
+{% block page_title %}Наша продукция{% endblock %}
+{% block page_slogan %}мы предлагаем только свежие продукты собственного производства{% endblock %}
+
+{% block breadcrumbs %}
+     <a href="{% url 'home' %}">Главная</a>
+        <span class="raquo">»</span>
+          Наша продукция
+
+{% endblock %}
+
+{% block main_content %}
+
+
+
+
+         {% for p in products %}
+
+         <div class="special-item">
+              {% thumbnail p.image "137x137" format='PNG' as im  %}
+                 <a href="{{ p.get_absolute_url }}">
+                  <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" align="left" title="{{ c.name }}" style="padding: 10px">
+                 </a>
+                  <h4 class="title">
+                  {{ p.name }}
+                  </h4>
+              {% endthumbnail %}
+
+
+        </div>
+
+          {% endfor %}
+
+
+
+
+
+{% endblock %}

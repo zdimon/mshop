@@ -5,7 +5,12 @@ from recipes.models import Recipe
 from recipes.models import RecipesComments
 from recipes.form import CommentForm
 from django.shortcuts import render_to_response
+from django.views.generic import ListView
 
+class RecipesView(ListView):
+    queryset = Recipe.objects.all().order_by('-id')
+    template_name = 'recipes_list.html'
+    paginate_by = 10
 
 def recipes_list(request):
     items = Recipe.objects.all()

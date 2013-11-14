@@ -14,94 +14,103 @@
 
 {% block main_content %}
 
-
-<form action="{% url 'basket_show' %}" method="post">
-{{ form.non_field_errors }}
-  <table border="1">
-  <tr>
-      <th>Наименование</th>
-      <th>Цена</th>
-      <th>Количество</th>
-      <th>Действие</th>
-  </tr>
-   {% for b in basket %}
-     <tr>
-       <td> {{ b.good.name }}  {{ b.name }} </td>
-       <td>{{ b.cost }} руб</td>
-       <td>
-          <input type="hidden" name="idp[]" value="{{ b.id }}">
-          <select name="cnt[]">
-              {% for i in 201|get_range %}
-                  <option {% if b.cnt == i %} selected {% endif %} value="{{ i }}">{{ i }}</option>
-              {% endfor %}
-          </select>
-       </td>
-       <td><a href="{% url 'basket_pop' b.id  %}">Удалить</a></td>
-     </tr>
-    {% endfor %}
-  </table>
-
-   <div>
-        {{ form.name.errors }}
-        <label for="id_subject">ФИО:</label>
-        {{ form.name }}
-   </div>
-
-   <div>
-        {{ form.email.errors }}
-        <label for="id_subject">Email:</label>
-        {{ form.email }}
-   </div>
-
-   <div>
-        {{ form.phone.errors }}
-        <label for="id_subject">Телефон:</label>
-        {{ form.phone }}
-   </div>
-
-   <div>
-        {{ form.city.errors }}
-        <label for="id_subject">Город:</label>
-        {{ form.city }}
-   </div>
-
-   <div>
-        {{ form.address.errors }}
-        <label for="id_subject">Адрес:</label>
-        {{ form.address }}
-   </div>
-
-   <div>
-        {{ form.description.errors }}
-        <label for="id_subject">Комментарий:</label>
-        {{ form.description }}
-   </div>
+{% if basket %}
 
 
+        <form action="{% url 'basket_show' %}" method="post">
+        {{ form.non_field_errors }}
+          <table width="100%" class="table_style">
+          <tr>
+              <th>Наименование</th>
+              <th>Цена</th>
+              <th>Количество</th>
+              <th>Действие</th>
+          </tr>
+           {% for b in basket %}
+             <tr>
+               <td> <a href="{{ b.good.get_absolute_url }}">{{ b.good.name }}</a>  {{ b.name }} </td>
+               <td>{{ b.cost }} руб</td>
+               <td>
+                  <input type="hidden" name="idp[]" value="{{ b.id }}">
+                  <select name="cnt[]">
+                      {% for i in 201|get_range %}
+                          <option {% if b.cnt == i %} selected {% endif %} value="{{ i }}">{{ i }}</option>
+                      {% endfor %}
+                  </select>
+               </td>
+               <td><a href="{% url 'basket_pop' b.id  %}">Удалить</a></td>
+             </tr>
+            {% endfor %}
+          </table>
+        <p></p>
+        <h2>Заполните детальную информацию о заказе</h2>
+      <div class="et-box et-shadow">
+           <div class="form_row">
+                {{ form.name.errors }}
+                <label for="id_subject">ФИО:</label>
+                {{ form.name }}
+           </div>
 
-   <div >
-        Регистрировать?
-       <input type="checkbox" onclick="$('#reg_block').toggle('slow');" >
-   </div>
+           <div class="form_row">
+                {{ form.email.errors }}
+                <label for="id_subject">Email:</label>
+                {{ form.email }}
+           </div>
 
-   <div id="reg_block" style="display: none">
-   <div>
-        {{ form.login.errors }}
-        <label for="id_subject">Логин:</label>
-        {{ form.login }}
-   </div>
+           <div class="form_row">
+                {{ form.phone.errors }}
+                <label for="id_subject">Телефон:</label>
+                {{ form.phone }}
+           </div>
+
+           <div class="form_row">
+                {{ form.city.errors }}
+                <label for="id_subject">Город:</label>
+                {{ form.city }}
+           </div>
+
+           <div class="form_row">
+                {{ form.address.errors }}
+                <label for="id_subject">Адрес:</label>
+                {{ form.address }}
+           </div>
+
+           <div class="form_row">
+                {{ form.description.errors }}
+                <label for="id_subject">Комментарий:</label>
+                {{ form.description }}
+           </div>
 
 
-   <div>
-        {{ form.password.errors }}
-        <label for="id_subject">Пароль:</label>
-        {{ form.password }}
-   </div>
-   </div>
+           {% if not user.is_authenticated %}
+           <div  class="form_row" style="text-align: center">
+                Регистрировать?
+               <input type="checkbox" onclick="$('#reg_block').toggle('slow');" >
+           </div>
+
+           <div id="reg_block" style="display: none">
+           <div class="form_row">
+                {{ form.login.errors }}
+                <label for="id_subject">Логин:</label>
+                {{ form.login }}
+           </div>
 
 
-   <p><input type="submit" value="Сохранить" /></p>
+           <div class="form_row">
+                {{ form.password.errors }}
+                <label for="id_subject">Пароль:</label>
+                {{ form.password }}
+           </div>
+             </div>
+           {% endif %}
 
-</form>
+           <div style="text-align: center"><input type="submit" value="Сохранить" /></div>
+
+        </form>
+    </div>
+
+    {% else %}
+      <div class="empty">Корзина пуста</div>
+    {% endif %}
 
 {% endblock %}

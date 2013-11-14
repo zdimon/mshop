@@ -1,0 +1,64 @@
+{% extends "two_columns.html" %}
+{% load thumbnail %}
+
+{% block meta_title %}
+  Мои заказы | Усадьба Княжичи
+{% endblock %}
+
+{% block meta_keyword %}
+  Мои заказы  | Усадьба Княжичи
+{% endblock %}
+
+{% block meta_description %}
+  Мои заказы  | Усадьба Княжичи
+{% endblock %}
+
+
+{% block page_title %}Мои заказы{% endblock %}
+{% block page_slogan %}{% endblock %}
+
+{% block breadcrumbs %}
+     <a href="{% url 'home' %}">Главная</a>
+        <span class="raquo">»</span>
+          Мои заказы
+
+{% endblock %}
+
+{% block main_content %}
+
+
+<table class="table_style" width="100%">
+    <tr>
+      <th>Товары</th>
+      <th>Дата заказа</th>
+      <th>Общая стоимость</th>
+      <th>Статус</th>
+    </tr>
+    {% for n in object_list %}
+        <tr>
+          <td>
+              {% for i in n.mshopbasketpositions_set.all %}
+                   {{ i.position.good.name }} {{ i.position.name }} {{ i.ammount }} {{ i.position.good.masure }} ({{ i.position.cost }} руб/{{ i.position.good.masure }})<br />
+              {% endfor %}
+          </td>
+          <td>{{ n.datetime }}</td>
+          <td>{{ n.cost }} руб.</td>
+          <td>{{ n.basket_type }}</td>
+        </tr>
+    {% endfor %}
+
+</table>
+
+      {% if  is_paginated %}
+    {% if  page_obj.has_previous %}
+      <a href="?page={{ page_obj.previous_page_number }}">назад</a> |
+    {% endif %}
+    страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}
+    {% if  page_obj.has_next %}|
+      <a href="?page={{ page_obj.next_page_number }}">вперед</a>
+    {% endif %}
+  {% endif %}
+
+
+
+{% endblock %}

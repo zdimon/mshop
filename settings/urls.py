@@ -4,6 +4,8 @@ from django.conf.urls.static import static
 from django.conf import settings
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
+from recipes.views import RecipesView
+from mshop.views import OrdersView
 
 admin.autodiscover()
 
@@ -22,7 +24,8 @@ urlpatterns = patterns('',
     ##################
 
     #####Рецепты####################
-    url(ur'^ферма/рецепты$', 'recipes.views.recipes_list', name='recipes_list'),
+    #url(ur'^ферма/рецепты$', 'recipes.views.recipes_list', name='recipes_list'),
+    url(ur'^ферма/рецепты$', RecipesView.as_view(), name='recipes_list'),
     url(ur'^рецепт/(?P<id>\d+)/$', 'recipes.views.recipes_item', name='recipes_item'),
     ####################
 
@@ -40,10 +43,12 @@ urlpatterns = patterns('',
 
     #######Магазин#####################
     url(ur'^наша/продукция$','mshop.views.category_list',name='category_list'),
+    url(ur'^ферма/продукты$','mshop.views.products_list',name='products_list'),
     url(ur'^каталог/(?P<id>\d+)/$', 'mshop.views.category_show', name='category_show'),
     url(ur'^товар/(?P<id>\d+)/$', 'mshop.views.good_show', name='good_show'),
     url(ur'^в-корзину/(?P<id>\d+)/$', 'mshop.views.good_put', name='good_put'),
     url(ur'^моя-корзина/$', 'mshop.views.basket_show', name='basket_show'),
+    url(ur'^мои-заказы/$', OrdersView.as_view(), name='orders_list'),
     url(ur'^очистить-корзинку/$', 'mshop.views.basket_clear', name='basket_clear'),
     url(ur'^удалить-из-корзинки/(?P<id>\d+)/$', 'mshop.views.basket_pop', name='basket_pop'),
     url(ur'^заказ/(?P<id>\d+)/$', 'mshop.views.order_show', name='order_show'),

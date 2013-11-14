@@ -9,6 +9,7 @@
       <meta name="keywords" content="{% block meta_keywords %}{% endblock %}"/>
       {% render_block "css" %}
       <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css" media="screen" />
+
       <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 
   </head>
@@ -29,8 +30,12 @@
 
 
             {% if user.is_authenticated %}
-                <p>Добро пожаловать, {{ user.username }}.</p>
-                <a href="{% url 'logout' %}">Выйти</a></p>
+               <div class="et-shadow et-box" style="width: 150px; display: inline-block; margin-left: 10px; padding: 5px">
+                <i>Добро пожаловать,</i> <br /> {{ user.username }}.
+                <br /> <a href="{% url 'orders_list' %}">Мои заказы</a>
+                <br /> <a href="{% url 'basket_show' %}">Моя корзина</a>
+                <br /> <a href="{% url 'logout' %}">Выйти</a>
+                </div>
             {% else %}
                <div id="login-form">
 				<ul>
@@ -78,15 +83,16 @@
 
       {% block base_content %}    {% endblock %}
 
-
-
 <div id="footer-bottom">
 
 <div class="container clearfix">
+    <img id="slogo" alt="Семейная ферма натуральных деревенских продуктов" src="{% static 'images/footer-logo.png' %}">
 <ul id="bottom-nav" class="bottom-nav">
 <li id="menu-item-1431" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1431">
 <li id="menu-item-1482" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1482">
 <a href="{% url 'quality' %}">Гарантия качества</a>
+<a href="{% url 'products_list' %}">Каталог продуктов</a>
+</li>
 </li>
 </ul>
 <p id="copyright">

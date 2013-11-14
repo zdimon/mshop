@@ -42,7 +42,7 @@
         </h3>
 
 
-    <div id="special-items" class="clearfix" style="width: 800px">
+    <div id="special-items" class="clearfix" style="width: 850px">
          {% for c in categories %}
 
          <div class="special-item">
@@ -74,7 +74,7 @@
                         <div id="main-products" class="clearfix">
 
                             {% for r in recepies %}
-
+                               <div class="recdiv">
                                  {% thumbnail r.image "213x160" as im  %}
                                      <a title="{{ r.title }}" href="{{  r.get_absolute_url }}">
                                       <img alt="{{ r.title }}" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" align="left" title="{{ c.name }}" style="padding: 10px">
@@ -82,7 +82,7 @@
 
                                  {% endthumbnail %}
 
-
+                               </div>
 
                             {% endfor %}
 

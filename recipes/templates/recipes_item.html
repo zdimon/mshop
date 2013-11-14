@@ -29,14 +29,38 @@
 
 
 
-                {% thumbnail item.image "240x240" as im %}
+                {% thumbnail item.image "280x280" as im %}
                   <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" align="left" style="padding: 10px">
                 {% endthumbnail %}
 
             {{ item.desc | safe }}
 
+            <p><b>Время приготовления:</b> {{ item.time }}</p>
+             <p>{{ item.authors|safe }}</p>
+
 
     <div style="clear: both"></div>
+
+    <h3>Инградиенты</h3>
+    <div class="et-box et-shadow">
+       <div class="et-box-content">
+          {{ item.ingradients|safe }}
+       </div>
+    </div>
+
+
+     {% for s in item.recipessteps_set.all %}
+       <div class="rstep">
+                {% thumbnail s.image "240x240" as im %}
+                  <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" align="left" style="padding: 10px">
+                {% endthumbnail %}
+            <p><b>{{ s.title }}</b></p>
+           {{ s.desc }}
+       </div>
+             <div style="clear: both"></div>
+
+    {% endfor %}
+
 
     {% for com in comments %}
        <p>

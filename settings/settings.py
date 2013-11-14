@@ -14,6 +14,7 @@ ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
 
+AUTH_PROFILE_MODULE = 'registrations.RegistrationProfile'
 
 TINYMCE_DEFAULT_CONFIG = {
     'plugins': "table,spellchecker,paste,searchreplace",
@@ -157,6 +158,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
     'django.core.context_processors.media',
     'django.core.context_processors.static',
+    'django.contrib.messages.context_processors.messages',
 )
 
 

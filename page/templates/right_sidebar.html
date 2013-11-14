@@ -1,24 +1,29 @@
 
 {% if basket_good %}
-<div style="border: 1px solid red; padding: 5px">
-Корзина
- {% for b in basket_good %}
-     <p>
-       {{ b.good.name }} {{ b.name }}  {{ b.cost }} руб/{{ b.good.masure }} <br />
-       {{ b.cnt }} {{ b.good.masure }}
-     </p>
+    <div class="et-box et-shadow">
+       <div class="et-box-content">
+         <b> Корзина </b>
+         {% for b in basket_good %}
+             <p>
+               {{ b.good.name }} {{ b.name }}  <br />{{ b.cost }} руб/{{ b.good.masure }} <br />
+               Количество: {{ b.cnt }} {{ b.good.masure }}
+             </p>
 
 
- {% endfor %}
+         {% endfor %}
 
- <a href="{% url 'basket_show' %}">Дальше</a>
- <a href="{% url 'basket_clear' %}">Очистить</a>
-</div>
+         <a href="{% url 'basket_show' %}">Дальше</a>
+         <a href="{% url 'basket_clear' %}">Очистить</a>
+        </div>
+    </div>
 {% endif %}
 
-
+    <div class="et-box et-shadow">
+       <div class="et-box-content">
 <ul>
 {% for c in cats %}
   <li> <a href="{{ c.get_absolute_url }}">{{ c.name }}</a></li>
 {% endfor %}
 </ul>
+       </div>
+    </div>

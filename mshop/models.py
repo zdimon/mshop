@@ -20,11 +20,14 @@ class MshopGoods(models.Model):
     TYPE_MESURE = (
         (u'кг.', u'кг.'),
         (u'шт.', u'шт.'),
+        (u'дес.', u'дес.'),
+        (u'л.', u'л.'),
+        (u'100гр.', u'100гр.'),
     )
     masure = models.CharField(verbose_name=u'Единицы измерения',
                                     choices=TYPE_MESURE,
                                     default='кг.',
-                                    max_length=6)
+                                    max_length=10)
     category = models.ForeignKey('MshopCategories')
     name = models.CharField(max_length=250, verbose_name=u"Наименование", blank=False)
     image  = models.ImageField(upload_to='goods', verbose_name=u'Изображение', blank=True)

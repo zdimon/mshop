@@ -114,13 +114,13 @@ img#about-image { float: left; margin: 3px 8px 8px 0px; }
 		h3.offer-title span, h3#comments span, h3#reply-title span { background:url(/static/images/offer-title-bg.png) no-repeat; display:block; padding-left: 20px; height: 43px; padding-right: 13px; }
 	#special-offers { position: absolute; left: 20%; top: -22px; }
 	#special-items { padding-bottom: 30px; padding-left: 18px; padding-top: 35px; }
-		.special-item { float: left; width:150px; margin-right: 20px; position: relative; }
+		.special-item { float: left; width:150px; margin-right: 20px; position: relative; height: 200px}
 		.last { margin-right: 0px; }
 			.special-item .price-tag, #et-slides .price-tag { background:url(/static/images/price-tag.png) no-repeat; position:absolute; top: -6px; left: -18px; width:80px; height: 53px; font-family: Georgia, serif; font-size: 20px; color: #ffffff; text-shadow: 1px 1px 1px rgba(0,0,0,0.2); padding-top:7px; padding-left: 10px; text-align: left; }
 			#et-slides .price-tag { z-index: 100; left: 117px; top: -13px; }
 			.special-item a:hover { text-decoration: none; }
 				.special-item .price-tag span, #et-slides .price-tag span { position:absolute; top: 8px; left: 61px; font-family: Georgia, serif; font-size: 12px; color: #ffffff; text-shadow: 1px 1px 1px rgba(0,0,0,0.2);  }
-			.special-item h4.title  { font-size: 16px; text-align: center; margin-left: -40px; padding-bottom: 12px; }	
+			.special-item h4.title  { font-size: 16px; text-align: center; padding-bottom: 12px; }
 				.special-item h4.title a { text-decoration: none; color: #434343; }
 			.special-item .et-links a { text-align:center; line-height:23px; height:23px; text-decoration:none; text-transform: uppercase; font-size: 10px; color: #838383; text-shadow: 1px 1px 1px #ffffff; }
 			.special-item .et-links a:hover { color: #4c4b4b; }
@@ -880,3 +880,10 @@ div.form_row label
     display: inline-block;
     text-align: center;
 }
+
+
+			                 .price-tag { height: 23px; font-family: Georgia, serif; font-size: 14px; color: #ffffff; text-shadow: 1px 1px 1px rgba(0,0,0,0.2); text-align: left; }
+							 a.price-tag { background:url(/static/images/price-tag2.png) no-repeat; float:left; width:55px; padding-left: 30px; }
+							 a.price-tag:hover { background-position: bottom left; }
+							 a:hover { text-decoration: none; }
+							 .price-tag span { position:absolute; top: 1px; left: 65px; font-family: Georgia, serif; font-size: 12px; color: #ffffff; text-shadow: 1px 1px 1px rgba(0,0,0,0.2);  }

@@ -24,11 +24,10 @@
 
      <ul>
      {% for p in good.mshopgoodspositions_set.all %}
-       <li>{{ p.name }} - {{ p.cost }} руб/кг  {{ p.descr }} <a href="{% url 'good_put' p.pk %}" >Кинуть в корзинку</a></li>
+       <li>{{ p.name }}  <a class="price-tag et-shop-item" href="{% url 'good_put' p.pk %}">{{ p.cost }}</a> руб/кг   {{ p.descr }} <a href="{% url 'good_put' p.pk %}" >Кинуть в корзинку</a></li>
      {% endfor %}
     </ul>
 {{ good.description | safe }}
 
-     {{ basket }}
 
 {% endblock %}

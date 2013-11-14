@@ -31,18 +31,20 @@
 
          {% for p in products %}
 
-         <div class="special-item">
+
               {% thumbnail p.image "137x137" format='PNG' as im  %}
+                  <div class="special-item">
                  <a href="{{ p.get_absolute_url }}">
                   <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" align="left" title="{{ c.name }}" style="padding: 10px">
                  </a>
                   <h4 class="title">
                   {{ p.name }}
                   </h4>
+                  </div>
               {% endthumbnail %}
 
 
-        </div>
+
 
           {% endfor %}
 

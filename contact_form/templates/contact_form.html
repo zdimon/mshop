@@ -22,10 +22,27 @@
 
 
 {% block main_content %}
-<form method="post" action="{% url 'contact_form' %}">
+    <div class="et-box et-shadow" align="center" style="padding: 20px">
+<form method="post" action="{% url 'contact_form' %}" class="form_class">
   {% csrf_token %}
-  {{ form.as_p }}
+
+
+                       <p>
+                        <label>{{ form.name.label_tag }}</label>
+                        {{ form.name }}
+                    </p>
+                        <p>
+                        <label>{{ form.email.label_tag }}</label>
+                        {{ form.email }}
+                    </p>
+
+                        <p>
+                                              <label></label>
+
+                        {{ form.body }}
+                    </p>
 
   <input type="submit" value="оставить отзыв" />
 </form>
+    </div>
 {% endblock %}

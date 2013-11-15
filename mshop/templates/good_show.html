@@ -3,6 +3,7 @@
 {% block page_title %}{{ good.name }}{% endblock %}
 {% block page_slogan %}{% endblock %}
 
+
 {% block breadcrumbs %}
      <a href="{% url 'home' %}">Главная</a>
         <span class="raquo">»</span>
@@ -14,19 +15,29 @@
 {% endblock %}
 
 {% block main_content %}
-
-                {% thumbnail good.image "237x237" format='PNG' as im  %}
+   <table>
+     <tr>
+         <td valign="top">
+              {% thumbnail good.image "237x237" format='PNG' as im  %}
                  <div style="align: right">
                   <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" align="left" title="{{ c.name }}" style="padding: 10px">
                 </div>
 
               {% endthumbnail %}
+         </td>
 
-     <ul>
+         <td valign="top">
+              <ul class="basket_list">
      {% for p in good.mshopgoodspositions_set.all %}
-       <li>{{ p.name }}  <a class="price-tag et-shop-item" href="{% url 'good_put' p.pk %}">{{ p.cost }}</a> руб/кг   {{ p.descr }} <a href="{% url 'good_put' p.pk %}" >Кинуть в корзинку</a></li>
+       <li> <span style="float: left; font-weight: bold; width: 100px;">{{ p.name }}&nbsp;</span>  <a class="price-tag et-shop-item" href="{% url 'good_put' p.pk %}">{{ p.cost|floatformat:"1" }}</a> <span style="float: left">руб/кг&nbsp;</span>   {{ p.descr }} <a href="{% url 'good_put' p.pk %}" >Положить в корзинку</a></li>
      {% endfor %}
     </ul>
+         </td>
+     </tr>
+   </table>
+
+
+
 {{ good.description | safe }}
 
 

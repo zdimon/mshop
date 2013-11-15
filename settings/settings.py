@@ -14,6 +14,19 @@ ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
 
+
+#EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+#EMAIL_FILE_PATH = '/tmp/app-messages' # change this to a proper location
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+DEFAULT_FROM_EMAIL = 'zdimon77@gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'zdimon77@gmail.com'
+EMAIL_HOST_PASSWORD = 'vfhbyrf76'
+EMAIL_PORT = 587
+
+
 AUTH_PROFILE_MODULE = 'registrations.RegistrationProfile'
 
 TINYMCE_DEFAULT_CONFIG = {
@@ -195,8 +208,7 @@ LOGGING = {
 ACCOUNT_ACTIVATION_DAYS = 7
 THUMBNAIL_ENGINE = 'sorl.thumbnail.engines.pil_engine.Engine'
 
-EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
-EMAIL_FILE_PATH = '/tmp/app-messages' # change this to a proper location
+
 
 
 CAPTCHA_FONT_SIZE = 30

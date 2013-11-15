@@ -22,10 +22,12 @@
 
 
 {% block main_content %}
-<form method="post" action=".">
+    <div class="et-box et-shadow" align="center" style="padding: 20px">
+<form method="post" action="." class="form_class">
   {% csrf_token %}
   {{ form.as_p }}
 
   <input type="submit" value="Зарегистрироваться" />
 </form>
 {% endblock %}
+</div>

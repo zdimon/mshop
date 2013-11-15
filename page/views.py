@@ -12,7 +12,7 @@ def page_show(request,slug):
     return HttpResponse(t.render(c))
 
 def home(request):
-    categories =  MshopCategories.objects.all()
+    categories =  MshopCategories.objects.all()[:5]
     recepies = Recipe.objects.all()
     t = loader.get_template('homepage.html')
     c = RequestContext(request,{'categories': categories, 'recepies': recepies})

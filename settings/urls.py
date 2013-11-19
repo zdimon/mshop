@@ -18,6 +18,10 @@ urlpatterns = patterns('',
 
     # url(r'^settings/', include('settings.foo.urls')),
 
+    # контактная форма ############
+    url(ur'^контакты$', 'just_contact.views.index', name='just_contact'),
+    ##################
+
     # новости############
     url(ur'^ферма/новости$', 'news.views.news_list', name='news_list'),
     url(ur'^новость/(?P<id>\d+)/$', 'news.views.news_item'),

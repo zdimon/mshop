@@ -15,5 +15,6 @@ class Page(models.Model):
         return self.title
     class Meta:
         verbose_name_plural = u'Страницы'
-
+        app_label = u'Содержимое'
+        db_table = 'page_page'
 # Create your models here.

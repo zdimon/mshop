@@ -16,6 +16,9 @@ class News(models.Model):
         return u"/новость/%i/" % self.id
     class Meta:
         verbose_name_plural = u'Новости'
+        verbose_name = u'Новость'
+        app_label = u'Содержимое'
+        db_table = 'news_news'
 
 class NewsImages(models.Model):
     news = models.ForeignKey('News')
@@ -26,3 +29,5 @@ class NewsImages(models.Model):
         return self.title
     class Meta:
         verbose_name_plural = u'Изображения к новостям'
+        app_label = u'Содержимое'
+        db_table = 'news_newsimages'

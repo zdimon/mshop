@@ -5,7 +5,7 @@ from mshop.models import MshopGoods
 from mshop.models import MshopGoodsPositions
 from mshop.models import MshopBasket
 from mshop.models import MshopBasketPositions
-from mshop.models import RecipesComments
+from mshop.models import MshopGoodsComments
 
 class MshopCategoriesAdmin(admin.ModelAdmin):
     pass

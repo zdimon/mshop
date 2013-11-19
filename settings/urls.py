@@ -6,8 +6,10 @@ from django.conf import settings
 from django.contrib import admin
 from recipes.views import RecipesView
 from mshop.views import OrdersView
+from django.contrib.auth.models import Group
 
 admin.autodiscover()
+admin.site.unregister(Group)
 
 urlpatterns = patterns('',
     # Examples:
@@ -65,6 +67,7 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
      url(r'^admin/', include(admin.site.urls)),
+     url(r'^grappelli/', include('grappelli.urls')), # grappelli URLS
 )+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:

@@ -11,3 +11,4 @@ sorl-thumbnail==11.12
 django-registration
 django-simple-captcha
 django-debug-toolbar
+django-grappelli==2.4.5

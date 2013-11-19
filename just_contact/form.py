@@ -15,7 +15,7 @@ class JustContactForm(forms.Form):
 
         subject, from_email, to = u'Поступило сообщение из контактной формы', data['email'], EMAIL_ADMIN
         text_content = u'Имя:'+data['name']+u' Email: '+data['email']+u' Сообщение:'+data['body']
-        html_content = u'<b>Имя:</b>'+data['name']+u'<br/>'+u'<b>Email:</b>'+data['email']+u'<b>Сообщение:</b>'+data['body']
+        html_content = u'<b>Имя:</b>'+data['name']+u'<br/>'+u'<b>Email:</b>'+data['email']+u'<br /><b>Сообщение:</b>'+data['body']
         msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
         msg.attach_alternative(html_content, "text/html")
         msg.send()

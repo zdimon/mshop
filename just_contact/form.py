@@ -10,7 +10,7 @@ class JustContactForm(forms.Form):
     body = forms.CharField(widget=forms.Textarea(attrs={'rows':5, 'cols':60}), label='Сообщение',required=True)
     captcha = CaptchaField()
     def save(self):
-        data = self.cleaned_data
+        data = self.cleaned_data  
 
 
         subject, from_email, to = u'Поступило сообщение из контактной формы', data['email'], EMAIL_ADMIN

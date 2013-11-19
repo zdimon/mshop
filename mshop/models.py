@@ -12,9 +12,10 @@ class MshopCategories(models.Model):
     def get_absolute_url(self):
         return u"/каталог/%i/" % self.id
     class Meta:
-        verbose_name_plural = u'Категории продуктов'
-        verbose_name = u'Категорию продуктов'
-
+        verbose_name_plural = u'Категории товаров'
+        verbose_name = u'Категорию товаров'
+        app_label = u'Магазин'
+        db_table = 'mshop_mshopcategories'
 
 class MshopGoods(models.Model):
     TYPE_MESURE = (
@@ -39,13 +40,18 @@ class MshopGoods(models.Model):
     class Meta:
         verbose_name_plural = u'Товары'
         verbose_name = u'товар'
+        app_label = u'Магазин'
+        db_table = 'mshop_mshopgoods'
 
 class MshopGoodsPositions(models.Model):
     good = models.ForeignKey(MshopGoods)
     name = models.CharField(max_length=250, verbose_name=u"Наименование")
     descr = models.CharField(max_length=250, verbose_name=u"Доп. характеристики", blank=True)
     cost = models.DecimalField(max_digits=6, decimal_places=2, verbose_name=u"Стоимость (руб)")
-
+    class Meta:
+        verbose_name_plural = u'Позиции товаров'
+        app_label = u'Содержимое'
+        db_table = 'mshop_mshopgoodspositions'
 
 
 
@@ -91,14 +97,19 @@ class MshopBasket(models.Model):
     class Meta:
         verbose_name_plural = u'Заказы'
         verbose_name = u'заказ'
+        app_label = u'Магазин'
+        db_table = 'mshop_mshopbasket'
 
 class MshopBasketPositions(models.Model):
     position = models.ForeignKey('MshopGoodsPositions')
     basket = models.ForeignKey('MshopBasket', default=False)
     ammount = models.IntegerField(verbose_name=u'Количество', blank=False)
+    class Meta:
+        verbose_name_plural = u'Позиции корзины'
+        app_label = u'Содержимое'
+        db_table = 'mshop_mshopbasketpositions'
 
-
-class RecipesComments(models.Model):
+class MshopGoodsComments(models.Model):
     recipe = models.ForeignKey('MshopGoods')
     author = models.CharField(max_length=250, verbose_name=u'Автор', blank=False)
     comment = models.TextField(verbose_name=u'Текст', blank=False)
@@ -106,3 +117,5 @@ class RecipesComments(models.Model):
     datetime = models.DateTimeField(u'Дата публикации')
     class Meta:
         verbose_name_plural = u'Комментарии'
+        app_label = u'Содержимое'
+        db_table = 'mshop_mshopgoodscomments'

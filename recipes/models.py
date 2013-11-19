@@ -17,6 +17,8 @@ class Recipe(models.Model):
         return u"/рецепт/%i/" % self.id
     class Meta:
         verbose_name_plural = u'Рецепты'
+        app_label = u'Содержимое'
+        db_table = 'recipes_recipe'
 
 class RecipesSteps(models.Model):
     recipe = models.ForeignKey('Recipe')
@@ -28,6 +30,8 @@ class RecipesSteps(models.Model):
     class Meta:
         verbose_name_plural = u'Шаги'
         ordering = ['id']
+        app_label = u'Содержимое'
+        db_table = 'recipes_recipessteps'
 
 class RecipesComments(models.Model):
     recipe = models.ForeignKey('Recipe')
@@ -37,3 +41,5 @@ class RecipesComments(models.Model):
     datetime = models.DateTimeField(u'Дата публикации')
     class Meta:
         verbose_name_plural = u'Комментарии'
+        app_label = u'Содержимое'
+        db_table = 'recipes_recipescomments'

@@ -1,5 +1,5 @@
 Django==1.5.4
-Pillow
+Pillow==2.0
 South==0.8.1
 django-mptt == 0.5.2
 django-sekizai==0.7
@@ -11,3 +11,4 @@ sorl-thumbnail==11.12
 django-registration
 django-simple-captcha
 django-debug-toolbar
+django-grappelli==2.4.5

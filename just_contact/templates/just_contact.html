@@ -1,0 +1,45 @@
+{% extends "two_columns.html" %}
+
+{% block page_title %}Контакты{% endblock %}
+{% block page_slogan %}мы с радостью выслушаем Вас{% endblock %}
+
+{% block breadcrumbs %}
+     <a href="{% url 'home' %}">Главная</a>
+         Контакты
+{% endblock %}
+
+{% block main_content %}
+<div class="et-box et-shadow" style="padding: 20px 20px 20px 200px">
+        <form action="{% url 'just_contact' %}" method="post" class="form_class">
+           {{ form.non_field_errors }}
+           {% csrf_token %}
+           <div class="form_row">
+                {{ form.name.errors }}
+                <p>ФИО:</p>
+                {{ form.name }}
+           </div>
+
+           <div class="form_row">
+                {{ form.email.errors }}
+                <p>Email:</p>
+                {{ form.email }}
+           </div>
+
+           <div class="form_row">
+                {{ form.body.errors }}
+
+                {{ form.body }}
+           </div>
+
+           <div class="form_row">
+                {{ form.captcha.errors }}
+                <p>Код:</p>
+                {{ form.captcha }}
+           </div>
+
+
+           <div style="text-align: center"><input type="submit" value="Отправить сообщение" /></div>
+
+        </form>
+    </div>
+{% endblock %}

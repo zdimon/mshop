@@ -1,5 +1,7 @@
 # Django settings for shop project.
 import os
+from local import *
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 THUMBNAIL_DEBUG = True
@@ -13,18 +15,7 @@ PROJECT_PATH = os.path.split(os.path.abspath(os.path.dirname(__file__)))[0]
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
-
-
-#EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
-#EMAIL_FILE_PATH = '/tmp/app-messages' # change this to a proper location
-
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-DEFAULT_FROM_EMAIL = 'zdimon77@gmail.com'
-EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'zdimon77@gmail.com'
-EMAIL_HOST_PASSWORD = 'vfhbyrf76'
-EMAIL_PORT = 587
+GRAPPELLI_INDEX_DASHBOARD = 'settings.dashboard.CustomIndexDashboard'
 
 
 AUTH_PROFILE_MODULE = 'registrations.RegistrationProfile'
@@ -38,16 +29,6 @@ TINYMCE_DEFAULT_CONFIG = {
 
 MANAGERS = ADMINS
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'mshop',                      # Or path to database file if using sqlite3.
-        'USER': 'postgres',
-        'PASSWORD': '1q2w3e',
-        'HOST': 'localhost',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': '',                      # Set to empty string for default.
-    }
-}
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
@@ -99,8 +80,9 @@ STATICFILES_DIRS = (
 # List of finder classes that know how to find static files in
 # various locations.
 STATICFILES_FINDERS = (
-    'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
@@ -145,7 +127,6 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Uncomment the next line to enable the admin:
-    'django.contrib.admin',
     'mshop',
     'page',
     'news',
@@ -161,6 +142,10 @@ INSTALLED_APPS = (
     'captcha',
     'debug_toolbar',
     'utils',
+    'just_contact',
+    'grappelli.dashboard',
+    'grappelli',
+    'django.contrib.admin',
         # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )

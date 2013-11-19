@@ -10,7 +10,8 @@ class Testimonials(models.Model):
     class Meta:
         verbose_name_plural = u'Отзывы'
         verbose_name =  u'отзыв'
-
+        app_label = u'Содержимое'
+        db_table = 'testimonials_testimonials'
     def __unicode__(self):
         return self.title
 

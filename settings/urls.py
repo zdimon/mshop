@@ -6,8 +6,10 @@ from django.conf import settings
 from django.contrib import admin
 from recipes.views import RecipesView
 from mshop.views import OrdersView
+from django.contrib.auth.models import Group
 
 admin.autodiscover()
+admin.site.unregister(Group)
 
 urlpatterns = patterns('',
     # Examples:
@@ -17,6 +19,10 @@ urlpatterns = patterns('',
      url(ur'^гарантия-качества$', 'page.views.page_show', {'slug': 'quality'}, name='quality'),
 
     # url(r'^settings/', include('settings.foo.urls')),
+
+    # контактная форма ############
+    url(ur'^контакты$', 'just_contact.views.index', name='just_contact'),
+    ##################
 
     # новости############
     url(ur'^ферма/новости$', 'news.views.news_list', name='news_list'),
@@ -61,6 +67,7 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
      url(r'^admin/', include(admin.site.urls)),
+     url(r'^grappelli/', include('grappelli.urls')), # grappelli URLS
 )+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:

@@ -1,5 +1,7 @@
 # Django settings for shop project.
 import os
+from local import *
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 THUMBNAIL_DEBUG = True
@@ -15,17 +17,6 @@ ADMINS = (
 )
 
 
-#EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
-#EMAIL_FILE_PATH = '/tmp/app-messages' # change this to a proper location
-
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-DEFAULT_FROM_EMAIL = 'zdimon77@gmail.com'
-EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'zdimon77@gmail.com'
-EMAIL_HOST_PASSWORD = 'vfhbyrf76'
-EMAIL_PORT = 587
-
 
 AUTH_PROFILE_MODULE = 'registrations.RegistrationProfile'
 
@@ -38,16 +29,6 @@ TINYMCE_DEFAULT_CONFIG = {
 
 MANAGERS = ADMINS
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'mshop',                      # Or path to database file if using sqlite3.
-        'USER': 'postgres',
-        'PASSWORD': '1q2w3e',
-        'HOST': 'localhost',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': '',                      # Set to empty string for default.
-    }
-}
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts

@@ -1,5 +1,5 @@
 .idea
 media/cache
 *.pyc
-
+settings/local.py
 

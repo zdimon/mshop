@@ -1,7 +1,7 @@
 #coding: utf-8
 from django import forms
 from captcha.fields import CaptchaField
-from django.core.mail import send_mail
+from django.core.mail import EmailMultiAlternatives
 from settings.settings import EMAIL_ADMIN
 
 class JustContactForm(forms.Form):
@@ -11,5 +11,14 @@ class JustContactForm(forms.Form):
     captcha = CaptchaField()
     def save(self):
         data = self.cleaned_data
-        body = u'<b>Имя:</b>'+data['name']+u'<br/>'+u'<b>Email:</b>'+data['email']+u'<b>Сообщение:</b>'+data['body']
-        send_mail(u'Поступило сообщение из контактной формы', body, data['email'], [EMAIL_ADMIN])
+
+
+        subject, from_email, to = u'Поступило сообщение из контактной формы', data['email'], [EMAIL_ADMIN]
+        text_content = u'Имя:'+data['name']+u' Email: '+data['email']+u' Сообщение:'+data['body']
+        html_content = u'<b>Имя:</b>'+data['name']+u'<br/>'+u'<b>Email:</b>'+data['email']+u'<b>Сообщение:</b>'+data['body']
+        msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+        msg.attach_alternative(html_content, "text/html")
+        msg.send()
+
+        #body = u'<b>Имя:</b>'+data['name']+u'<br/>'+u'<b>Email:</b>'+data['email']+u'<b>Сообщение:</b>'+data['body']
+        #send_mail(u'Поступило сообщение из контактной формы', body, data['email'], [EMAIL_ADMIN])

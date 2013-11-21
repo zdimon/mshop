@@ -10,7 +10,7 @@ class NewsImagesInline(AdminImageMixin, admin.TabularInline):
     verbose_name_plural = u'Изображения'
 
 
-class NewsAdmin(admin.ModelAdmin):
+class NewsAdmin(AdminImageMixin,admin.ModelAdmin):
     inlines = [
         NewsImagesInline,
     ]

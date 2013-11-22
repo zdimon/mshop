@@ -2,6 +2,7 @@
 from django.contrib import admin
 from news.models import News
 from news.models import NewsImages
+#from sorl.thumbnail.admin import AdminImageMixin
 
 
 from django.forms import ModelForm
@@ -75,12 +76,15 @@ class NewsForm(ModelForm):
 
 
 class NewsImagesInline(admin.TabularInline):
+
+#class NewsImagesInline(AdminImageMixin, admin.TabularInline):
+
     model = NewsImages
     verbose_name_plural = u'Изображения'
     form = NewsImageForm
 
 
-class NewsAdmin(admin.ModelAdmin):
+class NewsAdmin(AdminImageMixin,admin.ModelAdmin):
     inlines = [
         NewsImagesInline,
     ]

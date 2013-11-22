@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
 from django.db import models
 from tinymce import models as tinymce_models
-from news.items import ThumbnailImageField
 from sorl.thumbnail import get_thumbnail
 from django.utils.safestring import mark_safe
-
+from sorl.thumbnail import get_thumbnail
 
 
 
@@ -14,7 +13,7 @@ class News(models.Model):
     image  = models.ImageField(upload_to='news', verbose_name=u'Изображение', blank=True)
     desc = models.TextField(verbose_name=u'Короткое описание')
     content = tinymce_models.HTMLField()
-    datetime = models.DateTimeField(u'Дата публикации')
+    datetime = models.DateField(u'Дата публикации')
     pub = models.BooleanField(default=False, verbose_name=u'Опубликован?')
     @property
     def thumb(self):
@@ -25,6 +24,15 @@ class News(models.Model):
         return self.title
     def get_absolute_url(self):
         return u"/новость/%i/" % self.id
+
+    @property
+    def parsecontent(self):
+        c = unicode(self.content)
+        for i in self.newsimages_set.all():
+            im = get_thumbnail(i.image.path, '683', crop='center', quality=99)
+            istr = '<a  class="fancybox" rel="group" href="'+i.image.url+'"><img src="'+im.url+'" /></a>'
+            c = c.replace(i.alias, istr)
+        return c
     class Meta:
         verbose_name_plural = u'Новости'
         verbose_name = u'Новость'
@@ -34,8 +42,8 @@ class News(models.Model):
 class NewsImages(models.Model):
     news = models.ForeignKey('News')
     title = models.CharField(max_length=250, verbose_name=u'Заголовок')
-    image  = ThumbnailImageField(upload_to='recipe',verbose_name=u'Изображение')
-    alias = models.CharField(max_length=250, verbose_name=u'Метка')
+    image  = models.ImageField(upload_to='news', verbose_name=u'Изображение')
+    alias = models.CharField(max_length=250, verbose_name=u'Метка', help_text=u'Строка которая будет заменена в тексте изображением')
     def __unicode__(self):
         return self.title
     class Meta:

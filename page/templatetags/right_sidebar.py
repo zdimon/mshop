@@ -2,13 +2,14 @@
 from django import template
 from mshop.models import MshopCategories
 from mshop.models import MshopGoodsPositions
-
+from news.models import News
 # экземпляр класса, в котором все наши теги будут зарегистрированы
 register = template.Library()
 # регистрируем наш тег, который будет выводить шаблон right_sidebar.html
 @register.inclusion_tag("right_sidebar.html", takes_context = True)
 def show_sidebar(context):
-    cats = MshopCategories.objects.all() # выбираем все теги
+    cats = MshopCategories.objects.all()
+    news = News.objects.all()[:5]
     # возвращаем наши объекты в шаблон
     request = context['request']
     bas = []
@@ -34,5 +35,5 @@ def show_sidebar(context):
             bas.append(t)
 
 
-    return {'cats': cats, 'basket_good': bas}
+    return {'news': news, 'cats': cats, 'basket_good': bas}
 

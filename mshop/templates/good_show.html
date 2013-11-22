@@ -41,4 +41,39 @@
 {{ good.description | safe }}
 
 
+
+        <a name="form"></a>
+    <h1>Оставить комментарий</h1>
+    <div class="et-box et-shadow">
+       <div class="et-box-content">
+            <form action="{% url 'good_show' good.pk %}#form" method="post" class="form_class">{% csrf_token %}
+                  {{ form.recipe }}
+
+
+                   <p>
+                        <label style="text-align: left">Имя</label>
+                        {{ form.name.errors }}
+                        {{ form.name }}
+                    </p>
+
+
+                   <p>
+                    <label style="text-align: left">Сообщение</label>
+                        {{ form.message.errors }}
+                        {{ form.message }}
+                    </p>
+
+                                   <p>
+                    <label style="text-align: left">Защитный код</label>
+                        {{ form.captcha.errors }}
+                        {{ form.captcha }}
+                    </p>
+
+
+             <input type="submit" value="Сохранить" />
+            </form>
+       </div>
+    </div>
+
+
 {% endblock %}

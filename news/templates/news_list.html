@@ -30,10 +30,13 @@
 
           {% for n in items %}
               <div>
-                <h2 class="title"><a href="{{  n.get_absolute_url }}"> {{ n.title }}</a></h2>
-                {% thumbnail n.image "140x140" as im %}
+
+
+                {% thumbnail n.image "250x250" as im %}
                   <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" align="left" style="padding: 10px">
                 {% endthumbnail %}
+              <h2 class="title"><a href="{{  n.get_absolute_url }}"> {{ n.title }}</a></h2>
+
               </div>
 
 

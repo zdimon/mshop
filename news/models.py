@@ -38,6 +38,7 @@ class News(models.Model):
         verbose_name = u'Новость'
         app_label = u'Содержимое'
         db_table = 'news_news'
+        ordering = ['-id']
 
 class NewsImages(models.Model):
     news = models.ForeignKey('News')

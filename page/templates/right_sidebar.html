@@ -1,29 +1,87 @@
-
+{% load thumbnail %}
 {% if basket_good %}
-    <div class="et-box et-shadow">
+    <h3 style="color: red">Ваша корзина</h3>
+    <div class="et-box et-shadow" style="border:1px solid red;">
        <div class="et-box-content">
-         <b> Корзина </b>
+        <table>
+
+
          {% for b in basket_good %}
-             <p>
-               {{ b.good.name }} {{ b.name }}  <br />{{ b.cost }} руб/{{ b.good.masure }} <br />
+             <tr>
+                <td>
+                        {% thumbnail b.good.category.image "40x40" format='PNG' as im  %}
+                             <a href="{{ b.good.category.get_absolute_url }}">
+                              <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" align="left" style="padding: 10px">
+                             </a>
+                        {% endthumbnail %}
+                </td>
+                 <td>
+              <a href="{{  b.good.get_absolute_url }}"> {{ b.good.name }} {{ b.name }}</a>  <br />{{ b.cost }} руб/{{ b.good.masure }} <br />
                Количество: {{ b.cnt }} {{ b.good.masure }}
-             </p>
+                 </td>
+
+             </tr>
 
 
          {% endfor %}
 
-         <a href="{% url 'basket_show' %}">Дальше</a>
-         <a href="{% url 'basket_clear' %}">Очистить</a>
+        </table>
+
+         <a style="display: inline-block; font-size: 16px;" href="{% url 'basket_show' %}">Продолжить</a>
+         <a style="display: inline-block; float: right" href="{% url 'basket_clear' %}">Очистить</a>
         </div>
     </div>
 {% endif %}
+    <h3>Натуральные продукты</h3>
+    <div class="et-box et-shadow">
+       <div class="et-box-content">
+            <table>
+            {% for c in cats %}
+              <tr>
+                   <td>
+                        {% thumbnail c.image "40x40" format='PNG' as im  %}
+                            <a href="{{ c.get_absolute_url }}">
+                              <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" align="left" style="padding: 10px">
+                            </a>
+                            {% endthumbnail %}
+
+                   </td>
+
+                   <td>
+                       <a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
+                   </td>
+
+
+              </tr>
+            {% endfor %}
+            </table>
+       </div>
+    </div>
+
+
+    <h3>Последние новости</h3>
 
     <div class="et-box et-shadow">
        <div class="et-box-content">
-<ul>
-{% for c in cats %}
-  <li> <a href="{{ c.get_absolute_url }}">{{ c.name }}</a></li>
-{% endfor %}
-</ul>
+            <table>
+            {% for n in news %}
+              <tr>
+                   <td>
+                        {% thumbnail n.image "40x40" format='PNG' as im  %}
+                            <a href="{{ n.get_absolute_url }}">
+                              <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" align="left" style="padding: 10px">
+                            </a>
+                        {% endthumbnail %}
+
+                   </td>
+
+                   <td>
+                       <a href="{{ n.get_absolute_url }}">{{ n.title }}</a>
+                   </td>
+
+
+              </tr>
+            {% endfor %}
+            </table>
        </div>
     </div>

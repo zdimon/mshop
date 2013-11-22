@@ -84,7 +84,7 @@ class NewsImagesInline(admin.TabularInline):
     form = NewsImageForm
 
 
-class NewsAdmin(AdminImageMixin,admin.ModelAdmin):
+class NewsAdmin(admin.ModelAdmin):
     inlines = [
         NewsImagesInline,
     ]

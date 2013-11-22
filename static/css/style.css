@@ -54,7 +54,7 @@ a:hover { text-decoration: underline; }
 br.clear { margin: 0px; padding: 0px; }
 
 h1, h2, h3, h4, h5, h6 { padding-bottom: 5px; color: #808080; letter-spacing: -1px; line-height: 1em; font-weight: normal; }
-h1 a, h2 a, h3 a, h4 a, h5 a, h6 a { color: #000; padding-top: 5px; display: block }
+h1 a, h2 a, h3 a, h4 a, h5 a, h6 a { color: #4BA55E; padding-top: 5px; display: block }
 h1 { font-size: 30px; }
 h2 { font-size: 24px; }
 h3 { font-size: 22px; }
@@ -574,7 +574,7 @@ form.addtocart { width: 98% !important; }
 		.et-bio .et-box-content h1, .et-bio .et-box-content h2, .et-bio .et-box-content h3, .et-bio .et-box-content h4, .et-bio .et-box-content h5, .et-bio .et-box-content h6 { color: #4a6a8c; }
 
 .et-shadow { border: 1px solid #cbc4c4; box-shadow: 3px 3px 11px 1px rgba(0, 0, 0, 0.1); -moz-box-shadow:3px 3px 11px 1px rgba(0, 0, 0, 0.1); -webkit-box-shadow: 3px 3px 11px 1px rgba(0, 0, 0, 0.1); }
-	.et-shadow .et-box-content { color: #6d6e6e; background: #f1f1f1; border: 1px solid #ffffff; padding-left: 30px; }
+	.et-shadow .et-box-content { color: #6d6e6e; background: #f1f1f1; border: 1px solid #ffffff; padding-left: 10px; }
 		.et-shadow .et-box-content h1, .et-shadow .et-box-content h2, .et-shadow .et-box-content h3, .et-shadow .et-box-content h4, .et-shadow .et-box-content h5, .et-shadow .et-box-content h6 { color: #4e4e4e; }
 
 
@@ -802,7 +802,7 @@ padding-top:6px; min-height: 85px; }
 		.t-bottom-arrow { background: url(images/testimonial-bottom-arrow.png) no-repeat; width: 23px; height: 23px; position: absolute; bottom: -22px; right: 38px; }
 		.t-bottom-shadow { background: url(images/testimonial-bottom-shadow.png) no-repeat; width: 150px; height: 14px; position: absolute; bottom: -14px; left: 1px; }
 
-.et-dropcap { font-size: 48px; float: left; display:block; margin:0 7px 0 0; line-height: 1; }
+
 
 .et_quote { background: url(images/left-quotes-big.png) no-repeat; padding-left: 57px; min-height: 40px; font-family: Georgia, serif; font-size: 14px; font-style: italic; }
 	.et_right_quote { width: 100%; }

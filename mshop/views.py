@@ -11,6 +11,7 @@ from django.core.mail import send_mail
 from settings.settings import EMAIL_ADMIN, EMAIL_NOREPLY
 from django.views.generic import ListView
 from django.contrib import messages
+from mshop.forms import CommentForm
 
 class OrdersView(ListView):
     queryset = MshopBasket.objects.all().order_by('-id')
@@ -39,9 +40,18 @@ def category_show(request,id):
 
 
 def good_show(request,id):
+    alert = ''
     good = MshopGoods.objects.get(pk=id)
     t = loader.get_template('good_show.html')
-    c = RequestContext(request,{ 'good':good, 'basket': request.session.get('basket_good') })
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            alert = u'Запись сохранена'
+            form.save()
+            form = CommentForm(initial={'good_id': good.pk})
+    else:
+        form = CommentForm(initial={'good_id': good.pk})
+    c = RequestContext(request,{'alert':alert, 'form':form, 'good':good, 'basket': request.session.get('basket_good') })
     return HttpResponse(t.render(c))
 
 @csrf_exempt

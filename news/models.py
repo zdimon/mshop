@@ -2,6 +2,11 @@
 from django.db import models
 from tinymce import models as tinymce_models
 from news.items import ThumbnailImageField
+from sorl.thumbnail import get_thumbnail
+from django.utils.safestring import mark_safe
+
+
+
 
 # Create your models here.
 class News(models.Model):
@@ -10,6 +15,12 @@ class News(models.Model):
     desc = models.TextField(verbose_name=u'Короткое описание')
     content = tinymce_models.HTMLField()
     datetime = models.DateTimeField(u'Дата публикации')
+    pub = models.BooleanField(default=False, verbose_name=u'Опубликован?')
+    @property
+    def thumb(self):
+        image = get_thumbnail(self.image.path, '130x100', crop='center', quality=99)
+        out =  mark_safe(u'<img src="%s" />' % image.url)
+        return out
     def __unicode__(self):
         return self.title
     def get_absolute_url(self):

@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 
 from django import  forms
-from mshop.models import MshopBasket, MshopBasketPositions, MshopGoodsPositions
+from mshop.models import MshopBasket, MshopBasketPositions, MshopGoodsPositions, MshopGoodsComments
 from django.contrib.auth.models import User
 from django.contrib import auth
 from registrations.models import RegistrationProfile
 from captcha.fields import CaptchaField
+import datetime
+#from django_bootstrap_wysiwyg.widgets import WysiwygInput
 
 attrs_dict = { 'class': 'required' }
 
@@ -79,16 +81,18 @@ class BasketForm(forms.Form):
 class CommentForm(forms.Form):
     name = forms.CharField(widget=forms.TextInput(attrs={'size':'60'}), max_length=100, label='Имя',required=True)
     message = forms.CharField(widget=forms.Textarea(attrs={'rows':5, 'cols':80}), label='Сообщение',required=True)
-    recipe_id = forms.CharField(widget=forms.HiddenInput())
+    good_id = forms.CharField(widget=forms.HiddenInput())
     captcha = CaptchaField()
     # sender = forms.EmailField()
     # cc_myself = forms.BooleanField(required=False)
+
     def save(self):
        data = self.cleaned_data
-       c = RecipesComments.objects.create(
+       import pdb; pdb.set_trace()
+       c = MshopGoodsComments.objects.create(
            author = data['name'],
            comment = data['message'],
-           recipe_id = data['recipe_id'],
-           datetime = datetime.date.today()
+           good_id = data['good_id'],
+           created_at = datetime.date.today(),
        )
        c.save()

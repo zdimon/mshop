@@ -49,7 +49,24 @@
             {{ item.desc | safe }}
 
             <p><b>Время приготовления:</b> {{ item.time }}</p>
-             <p>{{ item.authors|safe }}</p>
+
+    <div style="clear: both"></div>
+
+            <table width="100%">
+               <tr>
+                   <td>
+                       {{ item.authors|safe }}
+                   </td>
+                   <td width="1">
+                    {% thumbnail item.author_photo "150x150" as im %}
+                      <a class="fancybox" rel="group" href="/media/{{ item.image }}">
+                       <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" align="left" style="padding: 10px">
+                      </a
+                    {% endthumbnail %}
+                   </td>
+               </tr>
+            </table>
+
 
 
     <div style="clear: both"></div>
@@ -79,8 +96,12 @@
 
     {% for com in comments %}
        <p>
-           {{ com.author }}
-           {{ com.comment }}
+       {{ com.comment }}
+
+           <div style="text-align: right; font-weight: bold; border-bottom: 1px solid silver; padding-bottom: 10px">
+              <i>{{ com.author }}</i>
+           </div>
+
        </p>
     {% endfor %}
 

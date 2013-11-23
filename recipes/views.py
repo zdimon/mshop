@@ -22,7 +22,7 @@ def recipes_list(request):
 def recipes_item(request,id):
     pars = {}
     item = Recipe.objects.get(pk=id)
-    comments = RecipesComments.objects.all().filter(recipe_id=item.pk)
+    comments = RecipesComments.objects.all().filter(recipe_id=item.pk, is_pub=True)
     pars['item'] = item
     pars['comments'] = comments
     t = loader.get_template('recipes_item.html')

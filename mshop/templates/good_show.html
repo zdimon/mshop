@@ -1,4 +1,6 @@
 {% extends "two_columns.html" %}
+{% load sekizai_tags %}
+{% load staticfiles %}
 {% load thumbnail %}
 {% block page_title %}{{ good.name }}{% endblock %}
 {% block page_slogan %}{% endblock %}
@@ -15,6 +17,17 @@
 {% endblock %}
 
 {% block main_content %}
+
+
+
+{% addtoblock "css" %}
+<link rel="stylesheet" href="{% static 'django_bootstrap_wysiwyg/css/bootstrap-wysiwyg.css' %}" type="text/css" media="screen" />
+{% endaddtoblock %}
+{% addtoblock "js" %}
+<script type="text/javascript" src="{% static 'django_bootstrap_wysiwyg/js/bootstrap-wysiwyg.js' %}"></script>
+{% endaddtoblock %}
+
+
    <table>
      <tr>
          <td valign="top">
@@ -41,13 +54,37 @@
 {{ good.description | safe }}
 
 
+    {% for c in comments %}
+     <div>
+
+        <p>
+            {{ c.comment | linebreaks }}
+        </p>
+
+       <div style="text-align: right; margin-right: 20px; font-weight: bold"><i>{{ c.author }}</i></div>
+
+     </div>
+
+    {% endfor %}
 
         <a name="form"></a>
     <h1>Оставить комментарий</h1>
+        {% if alert %}
+
+        <ul class="messages">
+                            {% for message in messages %}
+                                <li class="errornote">
+                                   {{ alert }}
+                                </li>
+                            {% endfor %}
+                            </ul>
+
+    {% endif %}
+
     <div class="et-box et-shadow">
        <div class="et-box-content">
             <form action="{% url 'good_show' good.pk %}#form" method="post" class="form_class">{% csrf_token %}
-                  {{ form.recipe }}
+                  {{ form.good_id }}
 
 
                    <p>
@@ -68,7 +105,6 @@
                         {{ form.captcha.errors }}
                         {{ form.captcha }}
                     </p>
-
 
              <input type="submit" value="Сохранить" />
             </form>

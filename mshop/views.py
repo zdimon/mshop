@@ -162,7 +162,6 @@ def order_confirm(request,id):
         pass
     o.send_notification()
     messages.success(request, "Спасибо что подтвердили ваш заказ. В ближайшее время мы с вами свяжимся.")
-    send_mail(u'Новый заказ', u'Поступил новый заказ', EMAIL_NOREPLY, [EMAIL_ADMIN])
     return redirect('order_show', id=o.id)
 
 def order_delete(request,id):

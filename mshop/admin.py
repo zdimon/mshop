@@ -31,3 +31,20 @@ class MshopBasketAdmin(admin.ModelAdmin):
     pass
 
 admin.site.register(MshopBasket, MshopBasketAdmin)
+
+
+class MshopGoodsCommentsAdmin(admin.ModelAdmin):
+    list_display = ['author','comment', 'is_pub', 'good', 'created_at']
+    actions = ['make_published']
+
+    def make_published(self, request, queryset):
+        for obj in queryset:
+            if obj.is_pub:
+                obj.is_pub = False
+            else:
+                obj.is_pub = True
+            obj.save()
+    make_published.short_description = u"Опубликовать/скрыть выбранные записи"
+
+
+admin.site.register(MshopGoodsComments, MshopGoodsCommentsAdmin)

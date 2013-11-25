@@ -3,7 +3,7 @@ from django.template import loader, RequestContext
 from django.http import HttpResponse, HttpResponseRedirect
 from mshop.models import MshopCategories
 from mshop.models import MshopGoods
-from mshop.models import MshopGoodsPositions, MshopBasket, MshopBasketPositions
+from mshop.models import MshopGoodsPositions, MshopBasket, MshopBasketPositions, MshopGoodsComments
 from django.shortcuts import redirect, render_to_response
 from mshop.forms import BasketForm
 from django.views.decorators.csrf import csrf_exempt
@@ -12,6 +12,7 @@ from settings.settings import EMAIL_ADMIN, EMAIL_NOREPLY
 from django.views.generic import ListView
 from django.contrib import messages
 from mshop.forms import CommentForm
+from django.shortcuts import get_object_or_404
 
 class OrdersView(ListView):
     queryset = MshopBasket.objects.all().order_by('-id')
@@ -41,17 +42,19 @@ def category_show(request,id):
 
 def good_show(request,id):
     alert = ''
-    good = MshopGoods.objects.get(pk=id)
+    good = get_object_or_404(MshopGoods, pk=id)
+    comments = MshopGoodsComments.objects.all().filter(good_id=id, is_pub=True)
     t = loader.get_template('good_show.html')
     if request.method == 'POST':
         form = CommentForm(request.POST)
         if form.is_valid():
-            alert = u'Запись сохранена'
+            alert = u'Спасибо. Ваше сообщение сохранено и появится после проверки Администрацией.'
+            messages.success(request, "Спасибо. Ваше сообщение сохранено и появится после проверки Администрацией.")
             form.save()
             form = CommentForm(initial={'good_id': good.pk})
     else:
         form = CommentForm(initial={'good_id': good.pk})
-    c = RequestContext(request,{'alert':alert, 'form':form, 'good':good, 'basket': request.session.get('basket_good') })
+    c = RequestContext(request,{'comments':comments, 'alert':alert, 'form':form, 'good':good, 'basket': request.session.get('basket_good') })
     return HttpResponse(t.render(c))
 
 @csrf_exempt

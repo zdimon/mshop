@@ -74,12 +74,12 @@ def basket_show(request):
                 return None
     context['basket'] = bas
     if request.user.is_authenticated():
-        form = BasketForm(initial={'email':request.user.get_profile().email,
+        form = BasketForm(initial={'email':request.user.email,
                                    'phone':request.user.get_profile().phone,
                                    'city':request.user.get_profile().city,
                                    'address':request.user.get_profile().address,
-                                   'description':request.user.get_profile().description,
-                                   'name':request.user.get_profile().name}
+                                   'description':'',
+                                   'name':request.user.username}
             )
     else:
         form = BasketForm()
@@ -160,6 +160,7 @@ def order_confirm(request,id):
         o = MshopBasket.objects.get(pk=id)
     except ValueError:
         pass
+    o.send_notification()
     messages.success(request, "Спасибо что подтвердили ваш заказ. В ближайшее время мы с вами свяжимся.")
     send_mail(u'Новый заказ', u'Поступил новый заказ', EMAIL_NOREPLY, [EMAIL_ADMIN])
     return redirect('order_show', id=o.id)

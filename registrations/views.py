@@ -1,3 +1,4 @@
+#coding: utf-8
 """
 Views which allow users to create and activate accounts.
 
@@ -9,7 +10,8 @@ from django.views.generic.edit import FormView
 
 from registrations import signals
 from registrations.forms import RegistrationForm
-
+from django.contrib.auth import authenticate, login
+from django.contrib import messages
 
 class _RequestPassingFormView(FormView):
     """
@@ -48,7 +50,8 @@ class _RequestPassingFormView(FormView):
     def get_success_url(self, request=None, user=None):
         # We need to be able to use the request and the new user when
         # constructing success_url.
-        return super(_RequestPassingFormView, self).get_success_url()
+        return 'home'
+        #return super(_RequestPassingFormView, self).get_success_url()
 
     def form_valid(self, form, request=None):
         return super(_RequestPassingFormView, self).form_valid(form)
@@ -65,7 +68,7 @@ class RegistrationView(_RequestPassingFormView):
     disallowed_url = 'registration_disallowed'
     form_class = RegistrationForm
     http_method_names = ['get', 'post', 'head', 'options', 'trace']
-    success_url = None
+    success_url = 'home'
     template_name = 'registration_form.html'
 
     def dispatch(self, request, *args, **kwargs):
@@ -80,7 +83,15 @@ class RegistrationView(_RequestPassingFormView):
 
     def form_valid(self, request, form):
         new_user = self.register(request, **form.cleaned_data)
-        success_url = self.get_success_url(request, new_user)
+        messages.success(request, "Спасибо. Вы успешно зарегистрированы на нашем сайте. Выбирайте что Вам по душе и мы с радостью поделимся.")
+        #import pdb; pdb.set_trace()
+        new_user.backend = 'django.contrib.auth.backends.ModelBackend'
+        login(request,new_user)
+        from settings.settings import EMAIL_ADMIN
+        from utils.mail import send_mail, render_template
+        c = render_template('new_user.txt',{'email':new_user.email, 'name': new_user.username})
+        send_mail(EMAIL_ADMIN,EMAIL_ADMIN,u'На сайте зарегистрировался новый пользователь',c)
+        success_url = 'products_list'
         
         # success_url may be a simple string, or a tuple providing the
         # full argument set for redirect(). Attempting to unpack it

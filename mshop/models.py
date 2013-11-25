@@ -38,7 +38,7 @@ class MshopGoods(models.Model):
 
     masure = models.CharField(verbose_name=u'Единицы измерения',
                                     choices=TYPE_MESURE,
-                                    default='кг.',
+                                    default=u'кг.',
                                     max_length=10)
     category = models.ForeignKey('MshopCategories')
     name = models.CharField(max_length=250, verbose_name=u"Наименование", blank=False)
@@ -101,6 +101,33 @@ class MshopBasket(models.Model):
         for i in pos:
             r = r + (i.position.cost*i.ammount)
         return r
+
+    def send_notification(self):
+
+        from utils.mail import send_mail, render_template
+        from settings.settings import EMAIL_ADMIN, PROJECT_PATH
+        sa = 0
+        out =u'<tr>'
+        for o in self.mshopbasketpositions_set.all():
+            s = o.ammount*o.position.cost
+            out += u'<td>'+unicode(o.position.good)+u'<td>'
+            out += u'<td>'+unicode(o.position.cost)+u'руб/'+unicode(o.position.good.masure)+u'<td>'
+            out += u'<td>'+unicode(o.ammount)+u' '+unicode(o.position.good.masure)+u'<td>'
+            out += u'<td>'+unicode(s)+u'<td>'
+            sa += s
+        out += '</tr>'
+
+        t = render_template('order.txt',{
+            'email':self.email,
+            'name':self.name,
+            'address':self.address,
+            'desc':self.description,
+            'city':self.city,
+            'phone': self.phone,
+            'order': out,
+            'total': sa
+        })
+        send_mail(EMAIL_ADMIN,EMAIL_ADMIN,u'Поступил новый заказ!',t)
 
     class Meta:
         verbose_name_plural = u'Заказы'

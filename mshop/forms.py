@@ -14,7 +14,7 @@ attrs_dict = { 'class': 'required' }
 
 class BasketForm(forms.Form):
 
-    
+
     name = forms.CharField(max_length=100,
                            widget=forms.TextInput(attrs=attrs_dict),
                            label=u'Имя')

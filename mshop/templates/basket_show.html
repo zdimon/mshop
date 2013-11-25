@@ -29,7 +29,7 @@
            {% for b in basket %}
              <tr>
                <td> <a href="{{ b.good.get_absolute_url }}">{{ b.good.name }}</a>  {{ b.name }} </td>
-               <td>{{ b.cost }} руб</td>
+               <td>{{ b.cost }} руб/{{ b.good.masure }}</td>
                <td>
                   <input type="hidden" name="idp[]" value="{{ b.id }}">
                   <select name="cnt[]">
@@ -37,6 +37,7 @@
                           <option {% if b.cnt == i %} selected {% endif %} value="{{ i }}">{{ i }}</option>
                       {% endfor %}
                   </select>
+                  {{ b.good.masure }}
                </td>
                <td><a href="{% url 'basket_pop' b.id  %}">Удалить</a></td>
              </tr>
@@ -102,7 +103,12 @@
                 {{ form.password }}
            </div>
              </div>
+           {% else %}
+               <input type="hidden" name='login' value="">
+               <input type="hidden" name="password" value="">
            {% endif %}
+
+
 
            <div style="text-align: center"><input type="submit" value="Сохранить" /></div>
 

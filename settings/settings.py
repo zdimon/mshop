@@ -21,8 +21,10 @@ GRAPPELLI_INDEX_DASHBOARD = 'settings.dashboard.CustomIndexDashboard'
 AUTH_PROFILE_MODULE = 'registrations.RegistrationProfile'
 
 TINYMCE_DEFAULT_CONFIG = {
-    'plugins': "table,spellchecker,paste,searchreplace",
+    'plugins': "table,spellchecker,paste,searchreplace,fullscreen",
     'theme': "advanced",
+    'resize':  "true",
+    'height': "500",
     'cleanup_on_startup': True,
     'custom_undo_redo_levels': 10,
 }

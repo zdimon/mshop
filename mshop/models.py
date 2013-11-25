@@ -25,6 +25,18 @@ class MshopGoods(models.Model):
         (u'л.', u'л.'),
         (u'100гр.', u'100гр.'),
     )
+
+    TYPE_AMMOUNT = (
+        (u'много', u'много'),
+        (u'достаточно', u'достаточно'),
+        (u'мало', u'мало'),
+        (u'нет', u'нет'),
+    )
+    ammount = models.CharField(verbose_name=u'Количество',
+                                    choices=TYPE_AMMOUNT,
+                                    default=u'достаточно',
+                                    max_length=12)
+
     masure = models.CharField(verbose_name=u'Единицы измерения',
                                     choices=TYPE_MESURE,
                                     default='кг.',

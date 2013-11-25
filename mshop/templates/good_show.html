@@ -27,11 +27,31 @@
          </td>
 
          <td valign="top">
+            {% if  good.ammount %}
+            <p><b>Количество:</b>&nbsp; <span style="color: #4BA55E; font-size: 14; font-weight: bold">{{ good.ammount }}</span></p>
+            {% endif %}
+              {% if good.mshopgoodspositions_set.all.count > 1 %}
               <ul class="basket_list">
-     {% for p in good.mshopgoodspositions_set.all %}
-       <li> <span style="float: left; font-weight: bold; width: 100px;">{{ p.name }}&nbsp;</span>  <a class="price-tag et-shop-item" href="{% url 'good_put' p.pk %}">{{ p.cost|floatformat:"1" }}</a> <span style="float: left">руб/кг&nbsp;</span>   {{ p.descr }} <a href="{% url 'good_put' p.pk %}" >Положить в корзинку</a></li>
-     {% endfor %}
-    </ul>
+                 {% for p in good.mshopgoodspositions_set.all %}
+                   <li>
+                       <span style="float: left; font-weight: bold; width: 100px;">{{ p.name }}&nbsp;</span>
+                       <a class="price-tag et-shop-item" href="{% url 'good_put' p.pk %}">{{ p.cost|floatformat:"1" }}</a>
+                       <span style="float: left">руб/кг&nbsp;</span>   {{ p.descr }}
+                       <a href="{% url 'good_put' p.pk %}" >Положить в корзинку</a>
+                   </li>
+                 {% endfor %}
+               </ul>
+              {% else %}
+                  {% for p in good.mshopgoodspositions_set.all %}
+                 <p>
+                      <b>Стоимость:</b> <span style="color: #4BA55E; font-size: 14; font-weight: bold">{{ p.cost|floatformat:"1" }}
+                       руб/кг&nbsp</span>
+                     <p style="color: #4BA55E; font-size: 14; font-weight: bold">{{ p.descr }}</p>
+                </p>
+                <a class="single-addtocart et-shop-item" style="font-size: 18px; width: 250px" href="{% url 'good_put' p.pk %}">В корзину</a>
+                  {% endfor %}
+              {% endif %}
+
          </td>
      </tr>
    </table>

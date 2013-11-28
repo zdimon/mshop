@@ -23,7 +23,10 @@ class MshopGoodsAdmin(admin.ModelAdmin):
     inlines = [
         MshopGoodsPositionsInline,
     ]
-
+    list_display = ('thumbnail','name','category','ammount')
+    list_display_links = ('thumbnail','name')
+    list_filter = ('category__name',)
+    list_editable = ('ammount',)
 admin.site.register(MshopGoods, MshopGoodsAdmin)
 
 

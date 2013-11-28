@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from django.db import models
 from tinymce import models as tinymce_models
+from django.utils.safestring import mark_safe
+from sorl.thumbnail import get_thumbnail
 # Create your models here.
 
 # Create your models here.
@@ -48,6 +50,12 @@ class MshopGoods(models.Model):
         return self.name
     def get_absolute_url(self):
         return u"/товар/%i/" % self.id
+    @property
+    def thumbnail(self):
+        if (self.image):
+            image = get_thumbnail(self.image.path, '40x40', crop='center', format='PNG')
+            return mark_safe(u'<img src="%s" />' % image.url)
+        return u'нет изображения'
     class Meta:
         verbose_name_plural = u'Товары'
         verbose_name = u'товар'

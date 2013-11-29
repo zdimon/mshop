@@ -28,13 +28,16 @@
 {% block main_content %}
 
 
-          {% for n in items %}
+          {% for n in object_list %}
               <div>
 
 
                 {% thumbnail n.image "250x250" as im %}
+                     <div style="width: 255px; height: 255px; float: left; margin-right: 10px">
                   <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" align="left" style="padding: 10px">
+                    </div>
                 {% endthumbnail %}
+
               <h2 class="title"><a href="{{  n.get_absolute_url }}"> {{ n.title }}</a></h2>
 
               </div>
@@ -45,6 +48,16 @@
 
            {% endfor %}
 
+      <p></p>
 
+          {% if  is_paginated %}
+            {% if  page_obj.has_previous %}
+              <a href="?page={{ page_obj.previous_page_number }}">назад</a> |
+            {% endif %}
+            страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}
+            {% if  page_obj.has_next %}|
+              <a href="?page={{ page_obj.next_page_number }}">вперед</a>
+            {% endif %}
+          {% endif %}
 
 {% endblock %}

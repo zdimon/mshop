@@ -7,6 +7,7 @@ from django.contrib import admin
 from recipes.views import RecipesView
 from mshop.views import OrdersView
 from django.contrib.auth.models import Group
+from news.views import news_list
 
 admin.autodiscover()
 admin.site.unregister(Group)
@@ -25,7 +26,7 @@ urlpatterns = patterns('',
     ##################
 
     # новости############
-    url(ur'^ферма/новости$', 'news.views.news_list', name='news_list'),
+    url(ur'^ферма/новости$', news_list.as_view(), name='news_list'),
     url(ur'^новость/(?P<id>\d+)/$', 'news.views.news_item'),
     ##################
 

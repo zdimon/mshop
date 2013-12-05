@@ -22,7 +22,7 @@
                                 <div class="featured-bg"></div>
                                                     </div> <!-- end .featured-image -->
                                 <div class="featured-description">
-                                      <h1><a href="{% url 'about_us' %}">O нас</a></h1>
+                                      <h1 ><a style="color: #ffffff" href="{% url 'about_us' %}">O нас</a></h1>
                                     <p>Ферма «Усадьба Княжичи» — семейное фермерское хозяйство расположенное в 450 км от Москвы, на границе Калужской и Брянской областей, на берегу живописного озера.</p>
 
                                 </div> <!-- end .description -->
@@ -37,7 +37,7 @@
 
 
     <div id="main-content-area" class="container">
-        <h3 id="special-offers" class="offer-title">
+        <h3 id="special-offers" class="offer-title" style="white-space: nowrap">
         <span>Каждый четверг мы доставляем продукты с фермы в Москву. Готовы поделиться!</span>
         </h3>
 
@@ -68,13 +68,13 @@
         <div id="main-content-bg">
             <div id="main-content-bottom-bg" class="clearfix">
                     <div id="left-area">
-                    <h3 id="recent-products" class="offer-title">
+                    <h3 id="recent-products" class="offer-title" style="white-space: nowrap">
                     <span>Готовим вместе: Рецепты ваши, продукты наши!</span>
                     </h3>
                         <div id="main-products" class="clearfix">
 
                             {% for r in recepies %}
-                               <div class="recdiv">
+                               <div class="recdiv" >
                                  {% thumbnail r.image "213x160" as im  %}
                                      <a title="{{ r.title }}" href="{{  r.get_absolute_url }}">
                                       <img alt="{{ r.title }}" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" align="left" title="{{ c.name }}" style="padding: 10px">

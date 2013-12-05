@@ -12,6 +12,7 @@ from registrations import signals
 from registrations.forms import RegistrationForm
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
+from settings.local import EMAIL_NOREPLY, EMAIL_ADMIN
 
 class _RequestPassingFormView(FormView):
     """
@@ -90,7 +91,7 @@ class RegistrationView(_RequestPassingFormView):
         from settings.settings import EMAIL_ADMIN
         from utils.mail import send_mail, render_template
         c = render_template('new_user.txt',{'email':new_user.email, 'name': new_user.username})
-        send_mail(EMAIL_ADMIN,EMAIL_ADMIN,u'На сайте зарегистрировался новый пользователь',c)
+        send_mail(EMAIL_ADMIN,EMAIL_NOREPLY,u'На сайте зарегистрировался новый пользователь',c)
         success_url = 'products_list'
         
         # success_url may be a simple string, or a tuple providing the

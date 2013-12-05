@@ -29,13 +29,19 @@
 
 {% for t in object_list %}
 
-        <h2><a href="{{ t.get_absolute_url }}">{{ t.title }}</a></h2>
-         <p>
-         {{ t.content|truncatewords_html:25 | safe }}
+
+         <p style="font-size: 16px">
+         {{ t.content| linebreaks | safe }}
          </p>
-         <p>{{ t.datetime }}</p>
+
+         <span style="float: right; font-weight: bold">{{ t.title }} <i>{{ t.datetime }}</i></span>
+    <p></p>
+    <div style="height: 5px; border-bottom: 1px dotted #c0c0c0; padding-top: 5px; margin-bottom: 10px;"></div>
     {% empty %}
-    <p>Нет постов</p>
+    <p>Нет отзывов</p>
     {% endfor %}
+
+    <p></p>
+    <div align="center"> <a style="font-size: 16px" href="{%  url 'testimonials_create' %}"> Добавить отзыв </a></a> </div>
 
 {% endblock %}

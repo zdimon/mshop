@@ -112,7 +112,7 @@ img#about-image { float: left; margin: 3px 8px 8px 0px; }
 					#category-inner p.meta-info a { color: #fff; }
 	h3.offer-title, h3#comments, h3#reply-title  { background:url(/static/images/offer-title-bg.png) no-repeat right bottom; color:#000000; display:block; font-size: 16px; text-transform: uppercase; text-shadow: 1px 1px 1px #ffffff; padding-right: 8px; text-decoration:none; height: 43px; line-height: 41px; position:absolute; padding-bottom: 0px; }
 		h3.offer-title span, h3#comments span, h3#reply-title span { background:url(/static/images/offer-title-bg.png) no-repeat; display:block; padding-left: 20px; height: 43px; padding-right: 13px; }
-	#special-offers { position: absolute; left: 20%; top: -22px; }
+	#special-offers { position: absolute; left: 12%; top: -22px; }
 	#special-items { padding-bottom: 30px; padding-left: 18px; padding-top: 35px; }
 		.special-item { float: left; width:150px; margin-right: 20px; position: relative; height: 200px}
 		.last { margin-right: 0px; }
@@ -128,10 +128,10 @@ img#about-image { float: left; margin: 3px 8px 8px 0px; }
 				.special-item a.more-info { background:url(/static/images/more-info-bg.png) no-repeat; float:left; width:72px; }
 				.special-item a.add-to-cart:hover, .special-item a.more-info:hover { background-position: bottom left; }
 	#main-content {repeat-y 692px 0px; }
-			#main-content-bottom-bg { background:url(/static/images/main-content-bottom-bg.png) no-repeat 692px bottom; }
+
 				#left-area { float: left; width: 692px; position:relative; }
 				#sidebar { float: left; width: 268px; position:relative; background:url(/static/images/sidebar-bg.png) no-repeat 0px -1px; }
-					#recent-products { position: absolute; left: 40%; top: -22px; }
+					#recent-products { position: absolute; left: 35%; top: -22px; }
 					#main-products { padding-top: 23px; margin-bottom: 12px; width: 930px }
 						.main-product { float: left; width:117px; margin-right:52px; position: relative; margin-bottom: 38px; }
 						.main-prod { float: left; width:213px; margin-right:5px; position: relative; margin-bottom: 5px; }
@@ -834,9 +834,11 @@ a.small-button, a.big-button, a.icon-button { cursor: pointer; font-weight: norm
 
 .recdiv
 {
-    width: 230px;
-    height: 200px;
+    width: 220px;
+    height: 138px;
     float: left;
+    overflow: hidden;
+
 }
 
 .empty

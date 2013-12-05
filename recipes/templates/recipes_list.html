@@ -39,7 +39,7 @@
               </div>
 
              <h2 class="title"><a href="{{  n.get_absolute_url }}"> {{ n.title }}</a></h2>
-             {{ n.desc|safe }}
+             {{ n.desc| safe | truncatewords_html:20 }}
              <p><b>Время приготовления:</b> {{ n.time }}</p>
 
 

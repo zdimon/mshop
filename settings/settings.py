@@ -5,15 +5,14 @@ from local import *
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 THUMBNAIL_DEBUG = True
-EMAIL_ADMIN = 'admin@email.com'
-EMAIL_NOREPLY = 'noreply@email.com'
+
 
 INTERNAL_IPS = ('127.0.0.1',)
 
 PROJECT_PATH = os.path.split(os.path.abspath(os.path.dirname(__file__)))[0]
 
 ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
+     ('Dmitry', 'zdimon77@gmail.com'),
 )
 GRAPPELLI_INDEX_DASHBOARD = 'settings.dashboard.CustomIndexDashboard'
 

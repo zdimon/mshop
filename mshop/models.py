@@ -3,6 +3,7 @@ from django.db import models
 from tinymce import models as tinymce_models
 from django.utils.safestring import mark_safe
 from sorl.thumbnail import get_thumbnail
+from settings.local import EMAIL_NOREPLY, EMAIL_ADMIN
 # Create your models here.
 
 # Create your models here.
@@ -115,15 +116,15 @@ class MshopBasket(models.Model):
         from utils.mail import send_mail, render_template
         from settings.settings import EMAIL_ADMIN, PROJECT_PATH
         sa = 0
-        out =u'<tr>'
+        out =u''
         for o in self.mshopbasketpositions_set.all():
             s = o.ammount*o.position.cost
-            out += u'<td>'+unicode(o.position.good)+u'<td>'
-            out += u'<td>'+unicode(o.position.cost)+u'руб/'+unicode(o.position.good.masure)+u'<td>'
-            out += u'<td>'+unicode(o.ammount)+u' '+unicode(o.position.good.masure)+u'<td>'
-            out += u'<td>'+unicode(s)+u'<td>'
+            out += u'<tr><td>'+unicode(o.position.good)+u'</td>'
+            out += u'<td>'+unicode(o.position.cost)+u'руб/'+unicode(o.position.good.masure)+u'</td>'
+            out += u'<td>'+unicode(o.ammount)+u' '+unicode(o.position.good.masure)+u'</td>'
+            out += u'<td>'+unicode(s)+u'</td></tr>'
             sa += s
-        out += '</tr>'
+
 
         t = render_template('order.txt',{
             'email':self.email,
@@ -135,7 +136,7 @@ class MshopBasket(models.Model):
             'order': out,
             'total': sa
         })
-        send_mail(EMAIL_ADMIN,EMAIL_ADMIN,u'Поступил новый заказ!',t)
+        send_mail(EMAIL_ADMIN,EMAIL_NOREPLY,u'Поступил новый заказ!',t)
 
     class Meta:
         verbose_name_plural = u'Заказы'
